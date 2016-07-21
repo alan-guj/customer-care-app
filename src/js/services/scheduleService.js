@@ -65,7 +65,7 @@ function( ScheduleStorage,  ScheduleLogStorage,  $ionicLoading){
                     angular.isFunction(success) && success(increase);
                 },function(err){
                     $ionicLoading.show({
-                        template:'加载失败,'+err,
+                        template:'加载失败,'+err.data.message,
                         duration:1000,
                     });
                     angular.isFunction(fail) && fail(err);
