@@ -1,0 +1,72 @@
+/* Empty. Add your own CSS if you like */
+.cs-interactionBox{position: absolute;top: 210px;right: 0;bottom: 50px;left: 0;overflow-y: scroll;
+padding: 0 10px; font: 14px/2em microsoft yahei,arial,verdana,helvetica,sans-serif;}
+.cs-dianzan-pinglun-border {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #A0A0A0;
+}
+.cs-dianzan-display{height: 30px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-left: 10px;}
+.cs-pinglun-display {
+    position: relative;
+    top: 8px;
+    text-align: left;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.cs-interactionBox i.icon{
+    color: #336699;
+    font-size: 18px;
+}
+#pinglun-list1 li{position: relative;}
+.cs-interactionBox .itemTime{color: #d0d0d0;font-size: 12px;display: inline-block;width: 45%;line-height: 14px;
+  position: absolute;top:10px;right: 0px;text-align: right;}
+.cs-interactionBox .itemDescr{text-indent: 2em;margin-top: -5px;}
+.cs-pinglQA-statistics i.icon,.cs-dianzan-display i.icon{ padding-right: 5px;}
+.singleCheckbox{
+  width: 100px;
+  float: right;
+  padding-top: 3px;
+}
+/*复选按钮checkbox*/
+.cs-check-switch{ display:none;}
+.cs-check-switch-slider .cs-swi-check{ display:inline-block;width:19px; height:19px; background:#fff; border:1px solid #333; margin-right:0px; font-size:16px;}
+.cs-check-switch-slider span{width:19px; height:19px; position:relative;}
+.cs-check-switch:checked +.cs-check-switch-slider .cs-swi-check:before{position:absolute;content:'';top:2px; left:2px;display:block;width:14px; height:9px; border-left:1px solid #007bbb; border-bottom:1px solid #007bbb; -webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);transform:rotate(-45deg);}
+.cs-check-switch:checked +.cs-check-switch-slider .cs-swi-check{border:1px solid #007bbb;}
+.cs-data-list ul li label.cs-check-switch-slider{width:auto; position:relative; top:5px;}
+.cs-checkbox-item{float: right; width:35px;}
+
+.cs-pinglQA-statistics {
+    padding-left: 10px;
+    border-bottom: dashed 1px #A0A0A0;
+    margin-bottom: 3px;
+}
+
+ul.cs-pinglQA-Item li:last-child{
+    border-bottom: 5px solid #e8e8e8;
+}
+
+.cs-blue {
+    color: #336699;
+}
+.cs-pinglun-display .cs-speaker{cursor:pointer;}
+
+input.tempInput{position: relative;width: 100%;z-index: 100;font-size: 14px;}
+p.alignPicBtm{position: absolute;left: 106px;bottom: 10px;}
+.popup-head .icon.ion-coffee{font-size: 20px;color: #6F4E37;padding-right: 5px;}
+.icon.ion-android-bulb{font-size: 20px;color: #f60;padding-right: 5px;}
+.icon.ion-android-warning{font-size: 20px;color: #CC0033;padding-right: 5px;}
+.activityOpList i.icon{font-size: 20px;margin-right: 10px;}
+.tabs.activity-menu{top: 144px;height: 59px;padding: 5px 0;}
+.tabs.activity-menu a{position: relative;}
+.noBorder {
+    border:0;border:none;
+    appearance:none;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari 和 Chrome */
+  }
+  .cancelRsList input[type=text],.cancelRsList select{width: 100%;}
+  .popup-body {text-align: center;}
+  .kshInfoList select{width: 65%;}
+  .kshInfoList textarea{text-indent: 2em;}

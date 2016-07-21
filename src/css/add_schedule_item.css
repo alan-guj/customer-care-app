@@ -1,0 +1,61 @@
+.scd_style {
+	width: 50%; height : 30px;
+	color: #444;
+	height: 30px;
+	border: 0;
+	border:none;
+	background:#FFF;
+}
+.input-label_p15{
+	width:50px;
+}
+
+.input-label_p15 input{
+	color:#535353;
+}
+.input-label_p15 textarea{
+	color:#535353;
+}
+.scd_button_row{
+	padding:0px;text-align:center
+}
+
+
+.scd_button_row .fn_btn{
+width:70%;height:45px;font-size:14px;
+}
+
+.work_log_input_label{
+	margin: 15px 0px 5px 5px;
+	height:20px;
+	line-height: 20px;
+	padding-left:30px;
+	display: block;
+}
+
+.wl_success{
+	background: url(../../static/img/work_log_succ.png) left no-repeat;
+	background-size:20px 20px;
+}
+
+.wl_prov{
+	background: url(../../static/img/work_log_prov.png) left no-repeat;
+	background-size:20px 20px;
+}
+
+.wl_plan{
+	background: url(../../static/img/work_log_plan.png) left no-repeat;
+	background-size:20px 20px;
+}
+
+.textarea_info{
+	display: block;
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px; 
+	width:100%;
+	height:90px;
+	padding: 10px;
+	border:1px solid #f0f0f0;
+	background: #f7f7f7;
+	margin-top: 10px;
+}

@@ -1,0 +1,41 @@
+<ion-modal-view ng-controller="add_schedule_item_ctrl" title="日程">
+	<form name="scheduleForm" novalidate>
+		<div class="bar bar-header" style="border-bottom:2px solid #387ef5;">
+	        <div class="title" style="font-weight:bold;">{{scheduleInfo.action=='add'?'添加':'编辑'}}日程</div>
+	    </div>
+		<ion-content class="has-footer has-header">
+			<div>
+				<label class="item item-input"> 
+					<span class="input-label input-label_p15">客户</span>
+					<input ng-model="scheduleInfo.customer_id" type="hidden"/>
+					<input ng-model="scheduleInfo.customer_name" type="text"  placeholder="点击选择客户" ng-readonly="true" ng-disabled="scheduleInfo.schedule_id != 0" required ng-click="showCustomerLst()" >
+				</label>
+			  
+				<label class="item item-input">
+					<span class="input-label input-label_p15">时间</span>
+					<input ng-click="pick_schedule_date()" type="text" ng-readonly="true" ng-model="scheduleInfo.dateShow">
+				</label>
+				
+				<label class="item item-input"> 
+					<span class="input-label input-label_p15">形式</span>
+					<select ng-model="scheduleInfo.type" class="scd_style" required ng-change="" ng-options="x for x in careWayGrp"></select>
+				</label>
+				
+				<label class="item item-input"> <span class="input-label input-label_p15">目的</span>
+					<input ng-model="scheduleInfo.purpose"  type="text" placeholder="输入拜访目的" required>
+				</label>
+				
+				<label class="item item-input item-stacked-label">
+					<span class="input-label_p15">备注</span>
+					<textarea ng-model="scheduleInfo.description" placeholder="请输入备注"></textarea>  
+				</label>
+			</div>
+		</ion-content>
+	    <div class="bar bar-footer">
+	    	<div class="button-bar">
+				<button class="button button-stable" ng-click="cancelAdd()">取消</button>
+		  		<button class="button button-positive" ng-click="submitAdd()" ng-disabled="scheduleForm.$invalid">确定</button>
+		  	</div>
+		</div>
+	</form>
+</ion-modal-view>

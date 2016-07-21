@@ -1,0 +1,19 @@
+{
+  "name": "customer_care_ionic",
+  "app_id": "",
+  "proxies": [
+  {
+      "path": "/api",
+      "proxyUrl": "http://dev.jyx365.top:9053/api"
+  },
+  {
+      "path": "/customer_care/",
+      "proxyUrl": "http://cc-dev.jyx365.top:7053/customer_care/"
+  },
+  {
+      "path": "/login",
+      "proxyUrl": "http://cc-dev.jyx365.top:7053/customer_care/login"
+  }
+  ]
+
+}

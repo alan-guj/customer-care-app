@@ -1,0 +1,130 @@
+<ion-view title="客户详情">
+    <!--ion-header-bar align-title="center" class="bar-dark">
+        <a class="button  ion-chevron-left button-clear button-light" ng-click="retrunCustomList()">&nbsp;返回</a>
+        <h1 class="title">客户详情</h1>
+    </ion-header-bar-->
+    
+    <div class="bar cs-prevAfter">    
+        <button class="button button-clear button-stable" ng-click="currentIndexModify(-1)">
+            <i class="ion-chevron-left"></i> 上一条
+        </button>
+        <div class="h2 title" ui-sref="customer_list"><i class="ion-ios-undo-outline"></i>
+        {{cItem.index}}/{{customers.list.length}}</div>
+        <button class="button button-clear button-stable" ng-click="currentIndexModify(1)">
+            下一条<i class="ion-chevron-right"></i>
+        </button>
+    </div>
+
+    <div class="top-card-div">
+            <div class="item-thumbnail-left" ng-click="modifyCustomerInfo()">
+                <img ng-src="{{customer.headUrl||'img/man.jpg'}}">
+                <div class="right-div">
+                    <span class="name">{{customer.name}}
+                        <i ng-show ="showBirthday()" class="birthday"><img src="img/birthday.png"></i>
+                    </span>                    
+                  <!--   <span class="icon ion-ios-information-outline information" 
+                        ng-click="modifyCustomerInfo()">
+                    </span> -->
+                    <span class="role">{{customer.type}}</span>
+
+                    <div class="fiveStar">
+                      <i ng-repeat="i in currentUser.fiveStars"
+                        class="icon ion-star {{customer.myCustomer.star>$index ?'active':''}}">
+                      </i>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-div">
+              {{"下次拜访计划：" + setShowHistoryText()}}
+            </div>   
+      </div>
+    <ion-content class="has-top-card-div has-footer" ng-class="{true:'has-more-menu',false:''}[show_more_menu]" scroll="true">
+
+      
+         <ion-list ng-controller="visit_history_ctrl" class="list-inset">
+            <ion-item class="item-divider item-icon-left item-button" ng-click="show_visit_history(customer)">
+                显示历史记录
+                <i class="icon icon" ng-class="{true:'ion-ios-arrow-up',false:'ion-ios-arrow-down'}[is_show_visit_history]"></i>
+            </ion-item>
+            <div ng-show="is_show_visit_history">
+            <ion-item ng-repeat="item in visit_histories.list">
+                <div class="list schedule-basic-info-list">
+                    <li class="item title">
+                        <span>{{item.user.name}} {{item.endTime | date:'mediumDate'}}</span>
+                    </li>
+                    <li class="item">
+                        <span>目的：{{item.purpose}}</span>
+                    </li>
+                    <li class="item">
+                        <span>方式：{{item.type}}</span>
+                    </li>
+                    <li class="item">
+                        <span>说明：{{item.description}}</span>
+                    </li>
+                </div>
+                <ion-list class="schedule-log-list" ng-controller="show_schedule_log_ctrl">
+                    <ion-item ng-click="show_log(i,item)" ng-repeat="i in item.getLogs()" class="item-icon-left">
+                        <div ng-if="i.type=='short'">
+                            <i class="icon ion-ios-chatbubble"></i>
+                            <span>{{i.text}}</span>
+                        </div>
+                        <div ng-if="i.type=='location'">
+                            <i class="icon ion-ios-location"></i>
+                            <span ng-click="map_location()">足迹：位于 {{i.address}}</span>
+                        </div>
+                        <div ng-if="i.type=='result'">
+                            <i class="icon ion-ios-checkmark"></i>
+                            <span>已于{{i.time | date:'medium' }}关闭({{i.result}})</span>
+                        </div>
+                        <div ng-if="i.type=='voice'">
+                            <i class="icon" ng-init="i.playing=false" ng-class="{false:'ion-ios-play',true:'ion-ios-pause'}[i.playing]"></i>
+                            <span ng-if="!i.playing">时长{{i.period}}秒({{i.time | date:'medium'}})</span>
+                            <span ng-if="i.playing">内容：{{i.text}}</span>
+                        </div>
+                        <div ng-if="i.type=='photos'">
+                            <i class="icon ion-ios-photos"></i>
+                            <div class="images">
+                                <img ng-repeat="p in i.oss_urls | limitTo:9" ng-src="{{p}}">
+                            </div>
+                        </div>
+                        <div ng-if="i.type=='worklog'">
+                            <i class="icon ion-ios-book"></i>
+                            工作日志({{i.time | date:'medium'}})
+                        </div>
+                        <div ng-if="i.type=='chat_duration'">
+                            <i class="icon ion-ios-timer"></i>
+                            <span>交谈时间：从{{i.start | date:'HH:mm'}}到{{i.end | date:'HH:mm'}},共{{(i.duration/60000).toFixed(0)}}分钟</span>
+                        </div>
+
+                    </ion-item>
+                </ion-list>
+        </ion-item>
+        </div>
+        <ion-infinite-scroll
+                       ng-if="visit_histories.hasMore()"
+                       on-infinite="loadMore()"
+                       distance="1%"
+                       immediate-check="true">
+            </ion-infinite-scroll>
+        </ion-list>
+
+       
+    </ion-content>
+    
+    <div class="bar bar-footer bar-stable" ng-class="{true:'has-more-menu',false:''}[show_more_menu]">
+        <div class="button-bar">
+            <a class="button button-clear icon ion-ios-telephone" ng-click="detail_call_customer(customer.mobile)"></a>
+            <a class="button button-clear icon ion-ios-email" ng-click="detail_sms_customer(customer.mobile)"></a>
+            <a class="button button-clear icon ion-ios-calendar" ng-class="{true:'disabled',false:''}[customer.myCustomer.type =='']" ng-click="cDetail_add_schedule_item($event)"></a>
+            <a class="button button-clear icon ion-eye" ng-click="focusPeopleSetting()"></a>
+            <a class="button button-clear icon ion-more" ng-click="show_more_menu=!show_more_menu"></a>
+        </div>
+    </div>  
+    <div ng-init="show_more_menu=false" ng-show="show_more_menu" class="cs-more-menu bar bar-stable">  
+      <div class="button-bar">     
+        <a class="button button-clear icon ion-ios-box col col-20"></a>
+        <a class="button button-clear icon ion-ios-people col col-20"></a>
+      </div>
+    </div>
+
+</ion-view>

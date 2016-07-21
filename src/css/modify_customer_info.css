@@ -1,0 +1,36 @@
+
+.chevronStyle{
+    margin-right: 100px;
+}
+.headStyle{
+    position: absolute !important;
+    top: 16px !important;
+    left: 38px !important;
+    max-width: 70px !important;
+    max-height: 70px !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0% !important;
+}
+.nameStyle{
+    padding-top: 6px !important;
+    font-size: 24px !important;
+    padding-left: 64px !important;
+    line-height: 34px !important;
+    width: 165px !important;
+}
+.starStyle{
+    padding-left: 64px !important;
+}
+.starSize{
+    font-size: 24px !important;
+}
+.errorStyle{
+    color: red;
+}
+.eye-style{
+    float: right;
+    font-size: 40px;
+    margin-top:-20px;
+    z-index:9999;
+}

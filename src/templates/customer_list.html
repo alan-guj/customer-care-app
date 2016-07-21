@@ -1,0 +1,95 @@
+<ion-view title="客户列表">
+    <ion-content scroll="false">
+        <ion-side-menus enable-menu-with-back-views="false">
+            <ion-side-menu-content>
+                <div class="bar bar-header item-input-inset">
+                    <!--<ion-nav-LEFT-button>-->
+                    <button class="button button-icon icon ion-navicon" menu-toggle="left" 
+                        style="margin-right: 10.66667px">
+                    </button>
+                    <!--</ion-nav-back-button>-->
+                    <label class="item-input-wrapper">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="text" placeholder="姓名/角色/省份/其他 ..." id="search" ng-model="choice.searchText" ng-model-options="{debounce:800}" ng-change="set_clfilter()">
+                    </label>
+                    <!--<ion-nav-buttons side="right">-->
+                    <button class="button button-icon icon ion-ios-calendar" ui-sref="schedule_list" menu-toggle="right">
+                    </button>
+                    <!--</ion-nav-buttons>-->
+                </div>
+                <div class="my-tabs-top">                 
+                    共搜索出<span class="eNumRed">{{customers.list.length || '0'}}/{{customers.page.total || '0'}}</span>位客户
+                    <span ng-hide="choice.customType =='noplan'">，计划今日拜访<span class="eNumRed">{{customers.todayPlanNum || '0'}}</span>位</span>          
+                </div>
+                <ion-content class="has-header has-my-tabs-top has-footer cList" delegate-handle="mainScroll">
+                    <ion-list>
+                        <ion-item collection-repeat="item in customers.list track by item.id" class="item item-avatar"   
+                        on-touch="touch(item)" ng-click="customerDetail($index)">
+                            <div class="colorMaskDiv" ng-class="computeBgcolor(item)" ng-style="computeBgWidth(item)">
+                            </div>
+                            <img class="item-image" ng-src="{{item.headUrl||'img/man.jpg'}}">
+                            <h2>{{item.name}}</h2>
+                            <div>
+                                <span class="itemRole">{{item.type}}</span>
+                                <span class="itemEvent">{{showEvent(item)}}</span>
+                            </div>
+                            <div class="fiveStar visitName" ng-show="choice.customScope == 'group'">{{(item.nextScheduleDate&&item.nextVisitName) || (item.lastVisitDate&&item.lastVisitName) || ''}}</div>
+                            <div class="fiveStar" ng-show="choice.customScope == 'my'"><i ng-repeat="i in currentUser.fiveStars" class="icon ion-star {{item.myCustomer.star>$index ?'active':''}}"></i></div>
+
+                            <ion-option-button class="button-balanced" ng-show ="item.myCustomer.type !=''"
+                                               ng-click="add_schedule_item($index,item,$event)">
+                              <span class="icon ion-ios-calendar-outline"></span>
+                            </ion-option-button>
+                             <ion-option-button class="button-calm"
+                                               ng-click="call_customer(item.mobile)">
+                              <span class="icon ion-ios-telephone-outline"></span>
+                            </ion-option-button>
+                             <ion-option-button class="button-royal"
+                                               ng-click="sms_customer(item.mobile)">
+                              <span class="icon ion-ios-email-outline"></span>
+                            </ion-option-button>
+                        </ion-item>
+                    </ion-list>
+                    <ion-infinite-scroll 
+                        ng-if="customers.page.pageNum<customers.page.pages"
+                        on-infinite="loadMore()"
+                        distance="1%">
+                    </ion-infinite-scroll>
+                </ion-content>
+
+                <div class="bar bar-footer bar-stable button-bar">
+                    <button class="button button-positive" ng-click="addCustom()">添加新客户
+                    </button>
+                </div>
+            </ion-side-menu-content>
+            <ion-side-menu side="left" width="240" class="cs-side-bar">
+
+                <ion-content class="cs-side-content has-footer">
+                    <ion-list> 
+                        <ion-item menu-close>
+                            <ion-radio ng-repeat="item in choiceTimeList" ng-value="item.value" ng-model="choice.orderby"
+                             ng-change="set_clfilter('orderby',choice.orderby)" name="choiceOrderby">
+                                {{ item.text }}
+                            </ion-radio>
+                        </ion-item>  
+                        <ion-item menu-close>
+                             <ion-radio ng-repeat="item in choiceCustomTypeList" ng-value="item.value" ng-model="choice.customType" ng-change="set_clfilter('customType',choice.customType)" name="customType">
+                                {{ item.text }}
+                            </ion-radio>
+                        </ion-item>
+                        <ion-item menu-close>
+                            <ion-radio ng-repeat="item in choiceCustomScopeList" ng-value="item.value" ng-model="choice.customScope" ng-change="set_clfilter('customScope',choice.customScope)" name="customScope">
+                                {{ item.text }}
+                            </ion-radio>
+                        </ion-item>  
+                    </ion-list>
+                </ion-content>
+                <ion-footer-bar class="bar-stable" menu-close>
+                    <div class="cs-side-title-foot" ng-click="carePeriodSetting()">
+                        <i class="icon ion-android-options"></i>拜访周期设置
+                    </div>
+                </ion-footer-bar>
+            </ion-side-menu>
+        </ion-side-menus>
+    </ion-content>
+</ion-view>

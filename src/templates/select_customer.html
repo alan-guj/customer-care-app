@@ -1,0 +1,34 @@
+<!-- <ion-modal-view ng-controller="select_customer_ctrl" title="客户选择"> -->
+<ion-modal-view title="客户选择">
+     <div class="bar bar-header item-input-inset">
+         <label class="item-input-wrapper">
+             <i class="icon ion-search placeholder-icon"></i>
+             <input type="text" placeholder="姓名/角色/省份/其他 ..." id="search" ng-model="choice.searchText" ng-change="choiceChange()">
+         </label>
+     </div>
+     <ion-content class="has-header has-footer cList">
+         <ion-list>
+             <ion-item ng-repeat="item in customList.list"  
+             		  class="item item-avatar" ng-click="selectCustomer(item)">
+                 <img ng-src="{{item.headUrl ||'img/man.jpg'}}">
+                 <h2>{{item.name}}</h2>
+                 <div>
+                    <span class="itemRole">{{item.type}}</span>
+                    <span class="itemEvent">{{showEvent(item)}}</span>
+                 </div>
+
+                 <div class="fiveStar"><i ng-repeat="i in currentUser.fiveStars" class="icon ion-star {{item.myCustomer.star>$index ?'active':''}}"></i></div>
+                 </div>
+             </ion-item>
+            <ion-infinite-scroll 
+                        ng-if="customList.hasMore()"
+                        on-infinite="loadMore()"
+                        distance="1%">
+            </ion-infinite-scroll>
+
+         </ion-list>
+     </ion-content>
+     <div class="bar bar-footer bar-stable button-bar">
+         <button class="button button-positive" ng-click="cancelSelect()">取消 </button>
+     </div>
+</ion-modal-view>

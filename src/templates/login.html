@@ -1,0 +1,20 @@
+<ion-view title="用户登录">
+    <form name="loginForm" novalidate>
+    <ion-content scroll="false" class="has-footer">
+        <label class="item item-input">
+            <span class="input-label">用户名</span>
+            <input ng-model="userinfo.username" type="text"></input>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">密码</span>
+            <input ng-model="userinfo.password" type="password"></input>
+        </label>
+    </ion-content>
+    <div class="bar bar-footer">
+        <div class="button-bar">
+            <button class="button button-stable" ng-click="">取消</button>
+            <button class="button button-positive" ng-click="login()" ng-disabled="loginForm.$invalid">登录</button>
+        </div>
+    </div>
+    </form>
+</ion-view>

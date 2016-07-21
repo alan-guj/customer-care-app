@@ -1,0 +1,350 @@
+/* Empty. Add your own CSS if you like */
+
+.activity-item {
+}
+
+.activity-item img {
+    width:30%;
+    float:left;
+    margin-right:10px;
+}
+
+.activity-item h2{
+    white-space:normal;
+    width:90%;
+    font-weight:bold;
+}
+.activity-item p{
+    white-space:normal;
+}
+
+
+.activity-item .title {
+    display:flex;
+}
+
+.activity-item .icon {
+    display: block;
+    height: 20px;
+    float: right;
+    font-size: 12px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 20px;
+}
+
+.activity-item .attend-icon {
+    background-color: #99f048;
+    color: #fff;
+}
+
+.activity-item .originated-icon {
+    color: #f04848;
+    background-color: #f5f5f5;
+}
+
+.activity-item .closed-icon {
+    color: #797e75;
+    background-color: #f5f5f5;
+}
+
+
+.tabs div{
+     width:10%;
+}
+
+.tabs .right-button {
+    position:absolute;
+    right:5px;
+}
+
+.activity-list {
+     margin-top:90px;
+}
+
+
+.commPicker-tabs-container{
+  margin: 0px 10px;
+}
+.commPicker-tabs-container .tabbox{width:100%;height:auto;background:#fff;border:solid 1px #d0d0d0;}
+.commPicker-tabs-container .tabbox .tab{overflow:hidden;background:#eee;border-top:solid 1px #0080e2;}
+.commPicker-tabs-container .tabbox .tab a{display:block;padding:5px 10px;float:left;text-decoration:none;color:#333;
+  border-left:solid 1px #d0d0d0;}
+.commPicker-tabs-container .tabbox .tab a:nth-of-type(1){border-left:none;}
+.commPicker-tabs-container .tabbox .tab a.on{background:#fff;color:#0080e2;text-decoration:none;border-bottom:none;}
+.commPicker-tabs-container .tabbox .tab a.on span{color: #0080e2;}
+.commPicker-tabs-container .tabbox .tab a.tabTitle{text-align: center;}
+.commPicker-tabs-container .tabbox .tab a.width-4C{width: 25%;font-size: 16px;font-weight: 500;}
+.commPicker-tabs-container .tabbox .tab a.width-5C{width: 20%;font-size: 12px;font-weight: 500;padding:5px 0px;}
+.commPicker-tabs-container .tabbox .content .subContent{}
+.commPicker-tabs-container ul li {
+    position: relative;
+    padding: 10px 10px;
+    border-bottom: 1px solid #eeeeee;
+    overflow: hidden;
+}
+.commPicker-tabs-container ul li.selected{color:#0080e2;}
+
+.item-select option{
+    position: relative;
+    padding: 10px 10px;
+    border-bottom: 1px solid #eeeeee;
+    overflow: hidden;
+}
+
+.mbsc-android-holo-light {
+     pointer-events:auto;
+}
+
+.schedule_item.item-content-open{
+    padding-bottom: 0px;
+}
+.schedule_item.item-content {
+    padding-top: 0px;
+}
+
+
+
+.schedule-basic-info-list {
+    border-bottom: 1px;
+    border-style: groove;
+    margin-bottom: 0px;
+}
+
+.schedule-basic-info-list .item {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: rgb(238, 238, 238);
+    font-size: 15px;
+    min-height: 40px;
+}
+.schedule-basic-info-list .item span{
+    white-space:pre-wrap;
+}
+.schedule-log-list {
+    border-bottom: 1px;
+    border-bottom-style: groove;
+}
+.schedule-log-list .item {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #fff;
+    font-size: 15px;
+    min-height: 40px;
+}
+
+.schedule-log-list .item .icon {
+    font-size: 24px;
+    height: 40px;
+}
+
+.schedule-log-list .item span{
+    display: block;
+    width: 100%;
+    white-space: pre-wrap;
+}
+
+.schedule-log-list .item img{
+    width: 33%;
+    vertical-align: top;
+    height: 90px;
+}
+
+.schedule-log-list .item .images {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+
+.schedule-logs .item {
+    border-left-width: 2px;
+    border-left-style: groove;
+    border-right-width: 2px;
+    border-right-style: groove;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+.item-input.bottomline input[type='text'] {
+    border-bottom-width: 1px;
+    border-bottom-style: groove;
+    width: 90%;
+}
+
+.colorbar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.background-light {
+    border-left-color: #ddd;
+    border-left-width: 5px;
+    border-left-style: solid;
+}
+.background-stable {
+    border-left-color: #b2b2b2;
+    border-left-width: 5px;
+    border-left-style: solid;
+    background-color: rgba(178, 178, 178, 0.1);
+}
+.background-positive {
+    border-left-color: #0c60ee;
+    border-left-width: 5px;
+    border-left-style: solid;
+}
+.background-calm {
+    border-left-color: #0a9dc7;
+    border-left-width: 5px;
+    border-left-style: solid;
+}
+.background-assertive {
+    border-left-color: #e42112;
+    border-left-width: 5px;
+    border-left-style: solid;
+    background-color: rgba(228, 33, 18, 0.1);
+}
+.background-balanced {
+    border-left-color: #28a54c;
+    border-left-width: 5px;
+    border-left-style: solid;
+    background-color: rgba(40, 165, 76, 0.1);
+}
+.background-energized {
+    border-left-color: #e6b500;
+    border-left-width: 5px;
+    border-left-style: solid;
+    background-color: rgba(230, 181, 0, 0.1);
+}
+.background-royal {
+    border-left-color: #6b46e5;
+    border-left-width: 5px;
+    border-left-style: solid;
+}
+.background-dark {
+    border-left-color: #111;
+    border-left-width: 5px;
+    border-left-style: solid;
+}
+.has-bottom-menu {
+    margin-bottom: 89px;
+}
+
+
+.has-schedule-item-header {
+    margin-top: 100px;
+}
+.bottom-menu {
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    font-size: 11px;
+    background-color: #FFF;
+}
+
+
+.bottom-menu-item {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: block;
+    overflow: hidden;
+    max-width: 150px;
+    height: 100%;
+    color: inherit;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 10px;
+    font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+    opacity: 0.7;
+}
+
+.item-input-wrapper ~ .wrapper-icon{
+    margin-left: -40px;
+}
+
+
+i.circle {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.light {
+    background: #ddd;
+}
+.stable {
+    background: #b2b2b2;
+}
+.positive {
+    background: #0c60ee;
+}
+.calm{
+    background: #0a9dc7;
+}
+.assertive {
+    background: #e42112;
+}
+.balanced {
+    background: #28a54c;
+}
+.energized {
+    background: #e6b500;
+}
+.royal {
+    background: #6b46e5;
+}
+.dark {
+    background: #111;
+}
+.progress-line{
+    width: 100%;
+    height: 1px;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.progress-line .progress {
+    height: 100%;
+    width: 100%;
+    z-index: 99;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 1px;
+    position: relative;
+}
+.progress-bar .background {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.progress-bar .progress {
+    height: 100%;
+    width: 90%;
+    position: absolute;
+    z-index: 99;
+}
+
+.progress-bar .item-input-wrapper {
+    background-color:transparent;
+}
+

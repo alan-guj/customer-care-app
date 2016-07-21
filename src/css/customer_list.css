@@ -1,0 +1,87 @@
+.cList .item-content{z-index: 2;}
+.cList .item-content p{padding-top: 5px;}
+span.eNumRed{font-size: 16px;color: #e42012;}
+span.itemRole{font-size: 14px;color: #999;}
+span.itemEvent{position: absolute;right: 16px;top: 39px;font-size: 14px;}
+div.fiveStar{position: absolute;top: 16px;right: 16px;}
+div.fiveStar.visitName{font-size: 14px;}
+.ion-star{color: #d0d0d0;font-size: 16px;}
+.ion-star.active{color: #ff7600;}
+.colorMaskDiv{position: absolute;left: 0;top: 0;bottom: 0;width: 100%;}
+.redBg{background-color:rgba(239,78,58,0.2);border-left: 10px solid rgba(204,35,17,1);}
+.yellowBg{background-color:rgba(240,184,64,0.2);border-left: 10px solid rgba(211,146,17,1);}
+.greenBg{background-color:rgba(102,204,51,0.2);border-left: 10px solid rgba(73,143,36,1);}
+.cs-side-bar .bar{padding: 0;}
+.cs-side-bar [class ^= cs-side-title]{text-align: center;width: 100%;font-size: 18px;line-height: 44px;
+	background: #387ef5;color: #fff;}
+.cs-side-bar .cs-side-title-foot i{margin-right: 10px;}
+.cs-side-content .list>.item{padding: 0;border-bottom: 5px solid #999;}
+.my-tabs-top{width: 100%;font-size: 14px;background: #f8f8f8;text-align: center;
+	height: 28px;line-height: 28px;border-top: 1px solid #999;}
+.has-my-tabs-top{top:72px;}
+h1.title .icon.ion-coffee{font-size: 20px;color: #6F4E37;padding-right: 5px;}
+.bar.cs-prevAfter{background: #f8f8f8;}
+.bar.cs-prevAfter i{font-size: 20px;color:#333;}
+.bar.cs-prevAfter .ion-chevron-right{padding-left: 5px;}
+.bar.cs-prevAfter .title{font-size: 20px;margin: 0 80px;}
+.bar.cs-prevAfter .title i{padding-right: 5px;}
+.top-card-div{position: relative;height:120px;padding-top:8px;background: #fff;margin-top: 44px;z-index: 9;}
+.top-card-div .right-div{border-bottom: 1px solid #d0d0d0;height: 74px;}
+.top-card-div .bottom-div{position: absolute;bottom:0px;width:100%;height:28px;line-height:28px;
+	color: #333;padding-left:8px;border-bottom: 1px solid #999;}
+.top-card-div span.name{font-size: 24px;position: absolute;top: 18px;left: 106px;color: #333;display:inline-block;height:30px;line-height: 30px;}
+.top-card-div span.role{font-size: 14px;color: #999;position: absolute;top: 64px;left: 106px;}
+.top-card-div span.icon{font-size: 26px;position: absolute;top: 18px;display:inline-block;height:30px;line-height: 30px;}
+.top-card-div i.birthday{padding-left: 4px;}
+.top-card-div i.birthday img{width: 24px;}
+.top-card-div span.information{right: 16px;color: #333;}
+.top-card-div span.focus{right: 65px;color: #333;}
+.top-card-div div.fiveStar{position: absolute;top: 62px;right: 16px;}
+.top-card-div div.fiveStar .ion-star{font-size: 22px;}
+.top-card-div span.focus.ion-eye{color: #ff7600;}
+.has-more-menu.bar-footer{bottom: 44px;}
+.has-more-menu.has-footer{bottom: 88px;}
+.cs-more-menu{position: absolute;bottom: 0px;border: none;}
+.cs-more-menu .icon{font-size: 17px;}
+.has-top-card-div{top: 164px;}
+
+
+.rItem{background: #fff;position: relative;height: 85px;border-bottom: 1px solid #d0d0d0;}
+.rItem.inforBox{padding: 10px 15px;height: auto;margin-top: 10px;background: #f8f8f8;}
+.rItem.inforBox .starName{font-size: 16px;}
+.rItem.inforBox .rangeStyle{
+    text-align: center;
+	width:80%;}
+p.nameList{color: #999;font-size: 12px;}
+span.completeInfo{position: absolute;right: 15px;top: 10px;font-size: 16px;color: #f6383a;}
+.rItem.personTaskBox{padding: 10px 15px;height: auto;}
+.rItem.personTaskBox .icon{position: absolute;right: 20px;top: 36%;font-size: 16px;color:#ccc;}
+.rItem.personTaskBox span.unComplete{color: #f6383a;}
+
+.dayColor{
+    color: #f6383a;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 16px;
+    }
+.customerSyle{
+    position:absolute ;
+    text-align: center;
+    top: 10px;
+    font-size: 16px;
+    color: #000;
+}
+.myLocq{
+    font-size: 24px;
+    position:relative;
+    left:-16px;
+}
+.myLocb{
+    font-size: 24px;
+    position:relative;
+    left:16px;
+}
+.inputStyle{
+    text-align: center;
+}

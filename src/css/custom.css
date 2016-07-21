@@ -1,0 +1,10 @@
+.rItem{background: #fff;position: relative;height: 85px;border-bottom: 1px solid #d0d0d0;}
+.rItem.inforBox{padding: 10px 15px;height: auto;margin-top: 10px;background: #f8f8f8;}
+.rItem.inforBox .kshName{font-size: 16px;}
+.rItem.inforBox .rangeStyle{
+    width:100%;;}
+.rItem span,p.nameList{color: #999;font-size: 12px;}
+.rItem.inforBox span.completeInfo{position: absolute;right: 15px;top: 10px;font-size: 16px;}
+.rItem.personTaskBox{padding: 10px 15px;height: auto;}
+.rItem.personTaskBox .icon{position: absolute;right: 20px;top: 36%;font-size: 16px;color:#ccc;}
+.rItem.personTaskBox span.unComplete{color: #f6383a;}
