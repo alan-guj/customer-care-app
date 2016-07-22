@@ -11,9 +11,11 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,src}) styles/main.css -->
-    <!-- include:css(css/**/*.css) -->
+    <!-- include:css(**/*.css) -->
     <!-- endbuild -->
-
+  </head>
+  <body ng-app="customer_care_web_server">
+      <ion-nav-view><img src="img/loading.gif"></ion-nav-view>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
@@ -40,15 +42,11 @@
 <!--.constant("sys_params",JSON.parse(window.sessionStorage.sys_params||"{}"));-->
     <!--</script>-->
     <!-- build:js({.tmp,src}) scripts/scripts.js -->
-    <!-- include:js(js/**/*.js) -->
+    <!-- include:js(**/*.js) -->
     <!-- endbuild -->
     <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=Q5VBZ-64BKP-SRKDA-LSJYZ-RXCEE-3RBJ6"></script>
     <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=Q5VBZ-64BKP-SRKDA-LSJYZ-RXCEE-3RBJ6&libraries=drawing,geometry,autocomplete,convertor"></script>
 
-    <script type="text/javascript">
-    </script>
-  </head>
-  <body ng-app="customer_care_web_server">
-      <ion-nav-view></ion-nav-view>
+
   </body>
 </html>

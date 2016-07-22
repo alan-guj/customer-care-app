@@ -167,8 +167,8 @@ gulp.task('client:build:prod', ['html', 'styles'], function () {
     .pipe(cssFilter)
     .pipe($.minifyCss({cache: true}))
     .pipe(cssFilter.restore())
-    //.pipe($.rev())
-    //.pipe($.revReplace())
+    .pipe($.rev())
+    .pipe($.revReplace())
     .pipe(gulp.dest(yeoman.output));
 });
 
