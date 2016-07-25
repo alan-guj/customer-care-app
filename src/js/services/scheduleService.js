@@ -32,8 +32,9 @@ function( ScheduleStorage,  ScheduleLogStorage,  $ionicLoading){
                 iterator.page.pages = 1;
                 iterator.page.total = 0;
                 iterator.list = [];
-                iterator.loadMore(function(){
+                iterator.loadMore(function(increase){
                     $ionicLoading.hide();
+                    angular.isFunction(success) && success(increase);
                 })
             };
 
@@ -65,7 +66,7 @@ function( ScheduleStorage,  ScheduleLogStorage,  $ionicLoading){
                     angular.isFunction(success) && success(increase);
                 },function(err){
                     $ionicLoading.show({
-                        template:'加载失败,'+err.data.message,
+                        template:'加载失败,'+err,
                         duration:1000,
                     });
                     angular.isFunction(fail) && fail(err);
@@ -77,8 +78,10 @@ function( ScheduleStorage,  ScheduleLogStorage,  $ionicLoading){
                 if(isNeedRefresh(filter)) {
                     cur_filter=filter;
                     iterator.refresh(success,fail);
+                }else{
+                    angular.isFunction(success) && success();
                 }
-                angular.isFunction(success) && success();
+                
             }
 
             function isNeedRefresh(filter){
@@ -301,7 +304,7 @@ function( ScheduleStorage,  ScheduleLogStorage,  $ionicLoading){
     var iterator = null;
     this.getScheduleList = function(filter,pageSize, success,fail){
         if(iterator) {
-            iterator.setFilter(filter);
+            iterator.setFilter(filter,success,fail);
             return iterator;
         }
         iterator = ScheduleIteratorObj.createObj(filter,success,fail);

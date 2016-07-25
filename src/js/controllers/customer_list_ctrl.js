@@ -54,9 +54,8 @@ app.controller('customer_list_ctrl', ['$scope',
     /************************************************************************
      * 初始化客户列表
      * *********************************************************************/    
-
     $scope.customers= CustomerService.getCustomerList($scope.choice);
-    console.log('$scope.customers',$scope.customers);
+    
         
     $scope.loadMore = function() {
         $scope.customers.loadMore(function(increase){
@@ -112,7 +111,7 @@ app.controller('customer_list_ctrl', ['$scope',
                         days=daysBetween($scope.currentItem.today,new Date(item.myCustomer.lastVisitDate).Format("yyyy-MM-dd"));
                         showStr = "距上次拜访已有"+days+"天";                    
                     }else{
-                        showStr = "无拜访计划与记录";   
+                        showStr = "无下次拜访计划与记录";   
                     };
                 }         
          
@@ -129,7 +128,7 @@ app.controller('customer_list_ctrl', ['$scope',
                         days=daysBetween($scope.currentItem.today,new Date(item.lastVisitDate).Format("yyyy-MM-dd"));
                         showStr = "距上次拜访已有"+days+"天";                    
                     }else{
-                        showStr = "无拜访计划与记录";   
+                        showStr = "无下次拜访计划与记录";   
                     } 
                 }     
                     
@@ -189,9 +188,11 @@ app.controller('customer_list_ctrl', ['$scope',
          * 添加新客户
          * ***********************************/
         $scope.addCustom = function () { 
-            customer_info.add();
+            customer_info.add(function(){
+                console.log('$scope.addCustomer');
+                $scope.customers.page.total +=1;
+            });
         }
-
 
         /**************************************
          * 客户详情

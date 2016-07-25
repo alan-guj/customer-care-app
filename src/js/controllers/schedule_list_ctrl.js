@@ -5,6 +5,7 @@ function(        $window,$scope,  $state,  $ionicViewSwitcher,  $ionicPopup,  $i
     $scope.current_user = current_user;
 
     $scope.ScheduleService = ScheduleService;
+
     $scope.filter_options = {
         time_range:[
             {title:'当日',value:'day'},

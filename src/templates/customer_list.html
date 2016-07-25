@@ -10,7 +10,7 @@
                     <!--</ion-nav-back-button>-->
                     <label class="item-input-wrapper">
                         <i class="icon ion-search placeholder-icon"></i>
-                        <input type="text" placeholder="姓名/角色/省份/其他 ..." id="search" ng-model="choice.searchText" ng-model-options="{debounce:800}" ng-change="set_clfilter()">
+                        <input type="text" placeholder="姓名/角色/省市" id="search" ng-model="choice.searchText" ng-model-options="{debounce:800}" ng-change="set_clfilter()">
                     </label>
                     <!--<ion-nav-buttons side="right">-->
                     <button class="button button-icon icon ion-ios-calendar" ui-sref="schedule_list" menu-toggle="right">
@@ -22,15 +22,19 @@
                     <span ng-hide="choice.customType =='noplan'">，计划今日拜访<span class="eNumRed">{{customers.todayPlanNum || '0'}}</span>位</span>          
                 </div>
                 <ion-content class="has-header has-my-tabs-top has-footer cList" delegate-handle="mainScroll">
+                    <div class="listNullShow" ng-hide="customers.list.length||customers.page.pages">
+                         <i class="ion-android-sad"></i>
+                         <p>抱歉，未搜索到匹配数据<br/>请重新设置或输入筛选条件，谢谢！</p>
+                    </div>
+                    
                     <ion-list>
-                        <ion-item collection-repeat="item in customers.list track by item.id" class="item item-avatar"   
-                        on-touch="touch(item)" ng-click="customerDetail($index)">
+                        <ion-item collection-repeat="item in customers.list track by item.id" class="item item-avatar"   ng-click="customerDetail($index)">
                             <div class="colorMaskDiv" ng-class="computeBgcolor(item)" ng-style="computeBgWidth(item)">
                             </div>
                             <img class="item-image" ng-src="{{item.headUrl||'img/man.jpg'}}">
-                            <h2>{{item.name}}</h2>
-                            <div>
-                                <span class="itemRole">{{item.type}}</span>
+                            <h2>{{item.name}} <span class="itemRole">{{item.type}}</span></h2>
+                            <div style="margin-top: 3px">
+                                <span class="itemProvince">{{item.province}}</span>
                                 <span class="itemEvent">{{showEvent(item)}}</span>
                             </div>
                             <div class="fiveStar visitName" ng-show="choice.customScope == 'group'">{{(item.nextScheduleDate&&item.nextVisitName) || (item.lastVisitDate&&item.lastVisitName) || ''}}</div>
@@ -53,7 +57,8 @@
                     <ion-infinite-scroll 
                         ng-if="customers.page.pageNum<customers.page.pages"
                         on-infinite="loadMore()"
-                        distance="1%">
+                        distance="1%"
+                        immediate-check="false">
                     </ion-infinite-scroll>
                 </ion-content>
 

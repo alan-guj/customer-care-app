@@ -177,7 +177,7 @@ app=angular.module('customer_care_web_server', ['ionic','angular-popups', 'ionic
 
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/schedule_list');
+    $urlRouterProvider.otherwise('/personal_homepage');
 
 
 

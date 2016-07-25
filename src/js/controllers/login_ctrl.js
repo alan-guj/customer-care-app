@@ -5,6 +5,14 @@ function( $scope,  $http,  $state,  OAuth,  OAuthToken,  oauth_params,  current_
     $scope.ready = false;
 
 
+    OAuthToken.getToken = function() {
+        return localConfig.getObject('token');
+    }
+    OAuthToken.setToken = function(data) {
+        localConfig.setObject('token',data);
+    }
+
+
 
     $scope.login = function(){
         OAuth.getAccessToken($scope.userinfo)

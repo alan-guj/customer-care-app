@@ -279,9 +279,27 @@
 .top3-div-style label{
 	line-height: 38px !important;
 }
-.top3-div-style div{
-	/*margin-top: 5px !important;*/
+
+
+
+.top10-div-style{
+	margin-top: 0px !important;
 }
+.top10-div-style label{
+	line-height: 38px !important;
+}
+.top10-padd2{
+	padding-top: 2px !important;
+}
+.top10-padd1{
+	padding-top: 6px !important;
+}
+/*.top10-div-style div{
+	padding-top: 4px !important;
+}*/
+/*.top10-div-style >:first-child{
+	padding-top: 0px !important;
+}*/
 .personal-title-div{
 	width: 100%;
 	height: 30px;
@@ -342,9 +360,26 @@
 .today-schedule img{
 	margin-top: 5px !important;
 }
-
-
-
+.persional-top10-label{
+    top: 0 !important;
+    left: -5px !important;
+    font-size: 22px !important;
+    font-weight: bold !important;
+}
+.no-data-div label{
+	position: absolute !important;
+    margin-top: 26px !important;
+    font-weight:bold !important;
+    font-size: 39px !important;
+    font-family: 'YouYuan';
+    color: #98CD74 !important;
+}
+.manager-change-button{
+	position: absolute;
+	right: 20px;
+	top:9px;
+	font-size: 28px;
+}
 
 
 

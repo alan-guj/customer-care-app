@@ -17,7 +17,7 @@ function(  $rootScope, $filter, $ionicModal,      $ionicScrollDelegate, Customer
 
     $scope.choiceChange = function(){
         $scope.customList.setFilter($scope.choice);
-        $ionicScrollDelegate.scrollTop();
+        $ionicScrollDelegate.$getByHandle('mainScroll').scrollTop();
     }
 
     $scope.loadMore = function(){
@@ -62,7 +62,7 @@ function(  $rootScope, $filter, $ionicModal,      $ionicScrollDelegate, Customer
      }
 
 
-    $scope.choice = {customScope: 'my',searchText:''};
+    $scope.choice = {orderby: "next_visit", customType: "all", customScope: "my",searchText:""};
 
     $scope.showEvent =function(item){
         var showStr ='';

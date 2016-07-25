@@ -348,3 +348,13 @@ i.circle {
     background-color:transparent;
 }
 
+.item-box .timeDiv{
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    background: #c0c0c0;
+    width: 100%;
+    height: 22px;
+    line-height: 22px;
+}
+.item-box .item-content{padding-bottom: 8px;}

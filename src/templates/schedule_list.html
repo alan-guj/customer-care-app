@@ -15,33 +15,44 @@
                              class="progress" ng-class="i.getColor()"></div>
                 </div>
                 <ion-content delegate-handle="schedules_list" class="has-top-progress-bar has-header has-footer">
+                    <div class="listNullShow" ng-hide="schedule_list.list.length||schedule_list.page.pages">
+                         <i class="ion-android-sad"></i>
+                         <p>抱歉，未搜索到匹配数据<br/>请重新设置或输入筛选条件，谢谢！</p>
+                    </div>
+
                     <ion-list>
-                        <ion-item  collection-repeat="i in schedule_list.list track by i.id"
-                            ng-click="show_schedule_detail(i)"
-                            class="item-thumbnail-left">
-                            <div ng-class="'background-'+i.getColor()" class="colorbar"></div>
-                            <img class="item-image" ng-src="{{i.customer.headUrl||'img/man.jpg'}}" ng-click="$event.stopPropagation();show_customer(i.customer)">
-                            <div class="row">
-                                <span class="col-80" style="font-size: 14px;">{{i.date | showDate}} <span ng-if="filter_param.scope.value=='group'">{{i.user.name}}</span></span>
-                                <span class="col-20" style="font-size: 14px;"><i ng-if="i.isToday()" class="circle" ng-class="i.getColor()"></i>{{i.status}}</span>
-                            </div>
-                            <div class="row" style="margin-top: 22px; padding-bottom: 0px;">
-                                <span class="col-80" style="font-size: 18px;">{{i.customer.name}}</span>
-                                <span style="font-size: 14px; padding-top: 2px; color: #444">{{i.customer.type}}</span>
-                            </div>
-                            <!--<div class="row" style="margin-top: 22px; padding-bottom: 0px;">-->
-                                <!--<span class="col-80" style="font-size: 18px;">{{i.user.name}}</span>-->
-                            <!--</div>-->
-                            <ion-option-button class="button-positive" ng-click="sms_customer(i)">
-                                <i class="icon ion-ios-chatbubble"></i>
-                            </ion-option-button>
-                            <ion-option-button class="button-positive" ng-click="call_customer(i)">
-                                <i class="icon ion-ios-telephone"></i>
-                            </ion-option-button>
-                            <ion-option-button ng-show="i.userId==current_user.data.id&&i.status=='未拜访'&&i.isToday()" class="button-positive" ng-click="close_schedule(i)">
-                                <i class="icon ion-ios-minus"></i>
-                            </ion-option-button>
-                        </ion-item>
+                        <div class ="item-box" item-height="100 + ((($index == 0) || ((i.date | date:'mediumDate') != (schedule_list.list[$index-1].date | date:'mediumDate'))) && 22)" collection-repeat="i in schedule_list.list track by i.id">
+                            <div class="timeDiv" ng-show = "($index == 0) || ((i.date | date:'mediumDate') != (schedule_list.list[$index-1].date | date:'mediumDate'))">{{i.date | date:'mediumDate'}}（{{i.date | showDate}}）</div>
+
+                            <ion-item  ng-click="show_schedule_detail(i)" class="item-thumbnail-left">             
+                                <div ng-class="'background-'+i.getColor()" class="colorbar"></div>
+                                <img class="item-image" ng-src="{{i.customer.headUrl||'img/man.jpg'}}" ng-click="$event.stopPropagation();show_customer(i.customer)">
+                                <div class="row">
+                                    <span class="col-80" style="font-size: 14px;"><span ng-show="filter_param.scope.value=='group'">{{i.user.name}}，</span>{{i.type}}</span>
+                                    <span class="col-20" style="font-size: 14px;"><i  ng-if="i.isToday()" class="circle" style="margin-right: 10px;margin-bottom:2px;" ng-class="i.getColor()"></i>{{i.status}}</span>
+                                </div>
+                                <div class="row" style="padding-top: 22px;color: #000;padding-bottom: 0px;">
+                                    <span class="col-80" style="font-size: 18px;">{{i.customer.name}}   
+                                    </span>   
+                                    <span class="itemRole col-20" style="color: #333;">{{i.customer.type}}</span>                                
+                                </div>
+                                <div class="row" style="padding-bottom: 0px;padding-top: 2px;">
+                                    <span class="itemProvince">{{i.customer.province}}</span>
+                                </div>
+                                <!--<div class="row" style="margin-top: 22px; padding-bottom: 0px;">-->
+                                    <!--<span class="col-80" style="font-size: 18px;">{{i.user.name}}</span>-->
+                                <!--</div>-->
+                                <ion-option-button class="button-positive" ng-click="sms_customer(i)">
+                                    <i class="icon ion-ios-chatbubble"></i>
+                                </ion-option-button>
+                                <ion-option-button class="button-positive" ng-click="call_customer(i)">
+                                    <i class="icon ion-ios-telephone"></i>
+                                </ion-option-button>
+                                <ion-option-button ng-show="i.userId==current_user.data.id&&i.status=='未拜访'" class="button-positive" ng-click="close_schedule(i)">
+                                    <i class="icon ion-ios-minus"></i>
+                                </ion-option-button>
+                            </ion-item>                            
+                        </div>
                     </ion-list>
                     <ion-infinite-scroll 
                         ng-if="schedule_list.hasMore()"

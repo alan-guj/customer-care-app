@@ -85,7 +85,8 @@ function(  $rootScope,   $filter,   $ionicModal,  ScheduleService,  ionicDatePic
      * 显示日期控件
      * ***************************************************/
     var datepicker= {
-        from: new Date(),
+
+        //from: new Date(new Date().getTime() - 30*24*60*60*1000), //前30天
         callback: function (val) {
             var date_value = new Date(val);
             $scope.scheduleInfo.schedule.date = date_value.toISOString();
@@ -107,7 +108,7 @@ function(  $rootScope,   $filter,   $ionicModal,  ScheduleService,  ionicDatePic
      * 选择客户模态框
      **************************************************/
     $scope.showCustomerLst = function() {
-        console.log('showCustomerLst:', $scope.scheduleInfo.customer);
+
         if($scope.scheduleInfo.preset_customer) return false;
         select_customer.select(function(resp){
              $scope.scheduleInfo.schedule.customer_id=resp.id;

@@ -40,9 +40,10 @@ function( $q, Customer,  $ionicLoading,  ScheduleService){
                 iterator.page.total = 0;
                 iterator.todayPlanNum =0;
                 iterator.list = [];
-                return iterator.loadMore(function(){
+                return iterator.loadMore(function(increase){
 
                     $ionicLoading.hide();
+                    angular.isFunction(success) && success(increase);
                 })
             };
 
@@ -58,6 +59,7 @@ function( $q, Customer,  $ionicLoading,  ScheduleService){
                 var params = {};
                 shallowCopy(cur_filter,params);
                 shallowCopy(iterator.page,params);
+                //params.pageNum++;
                 console.log('params',params);
                 iterator.$promise = Customer.get(params,function(resp){
                     iterator.page.pageNum = resp.pageNum;
@@ -86,6 +88,8 @@ function( $q, Customer,  $ionicLoading,  ScheduleService){
                 if(isNeedRefresh(filter)) {
                     shallowClearAndCopy(filter,cur_filter);
                     iterator.refresh(success,fail);
+                }else{
+                    angular.isFunction(success) && success();
                 }
             }
 
@@ -252,7 +256,7 @@ function( $q, Customer,  $ionicLoading,  ScheduleService){
     var iterator = null;
     this.getCustomerList = function(filter,success,fail){
         if(iterator) {
-             if(filter) iterator.setFilter(filter);
+             if(filter) iterator.setFilter(filter,success,fail);
              return iterator;
         }
         iterator = CustomerIteratorObj.createObj(filter,20,success,fail);

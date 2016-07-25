@@ -44,13 +44,19 @@ function(  $rootScope, $filter,current_user, $ionicModal,CustomerService,ionicDa
           }
         });
     }
+  var callbacks = {};
 	var customer_info = {
-		add:function(){
+		add:function(callbackfun){
+            callbacks.function = callbackfun;
       			initPrarm();
       			showUserInfoModal();
       			initProvince([]);
       			$scope.userObject.myCustomer.type = "primaryOwner";
-      			$scope.userObject.birthday=select_date_value;
+            if($scope.select_data_show==""){
+                $scope.userObject.birthday="";
+            }else{
+                $scope.userObject.birthday=select_date_value;
+            }
       			var groupCustomerIterator = CustomerService.getGroupCustomers();
             var groupCustomer = groupCustomerIterator.list;
             groupCustomerIterator.$promise.then(function(){
@@ -115,6 +121,7 @@ function(  $rootScope, $filter,current_user, $ionicModal,CustomerService,ionicDa
 			$scope.userObject.headUrl="";
 		}
 		var arr = [];
+
 		for(var x=0;x<$scope.userObject.customers.length;x++){
 			arr.push($scope.userObject.customers[x].id);
 		}
@@ -126,6 +133,8 @@ function(  $rootScope, $filter,current_user, $ionicModal,CustomerService,ionicDa
 			// $scope.userObject.star = $scope.starObj.num;
 			CustomerService.addCustomer($scope.userObject);
 		}
+    // $scope.$emit('add_customer_result', 'confirm');
+    callbacks.function();
 		$scope.user_info_modal.remove();
 	}
 	$scope.addCustomerM = function(obj){

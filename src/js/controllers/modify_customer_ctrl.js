@@ -65,7 +65,7 @@ app.controller('modify_customer_ctrl', ['$scope', '$filter', '$ionicModal', 'ion
                 isTeamLeader: true,
                 birthDay: new Date(),
                 cRole: "",
-                cHeadPic: "/img/man.jpg",
+                cHeadPic: "img/man.jpg",
                 cStar: 3,
                 groupMember: [],
                 hospitalArr: [],

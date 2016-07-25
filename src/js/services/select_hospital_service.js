@@ -22,11 +22,14 @@ function(  $rootScope, $filter, $ionicModal,Hospital,$ionicScrollDelegate) {
          // console.log("=======>>>>>========",page.pageNum , page.pages);
         return page.pageNum < page.pages;
     }
-    $scope.iObj = {"inputNameModel":""};
+    $scope.iObj = {"inputNameModel":"","areaName":""};
     var callbacks = {};
     $scope.multiSelect = false;
     $scope.hospitalObj = {} ;$scope.selectedObj = {};
     var select_hospital = {
+        setAreaName:function(name){
+            $scope.iObj.areaName = name;
+        },
     	multiSelect:function(bool){
     		 $scope.multiSelect = bool;
     	},
@@ -37,14 +40,16 @@ function(  $rootScope, $filter, $ionicModal,Hospital,$ionicScrollDelegate) {
         createModal:function(){
             createModal(true);
         },
-    	show:function(arr){
+    	show:function(arr,areaname){
     		 $scope.iObj.inputNameModel = "";
+             $scope.iObj.areaName = "";
              $scope.selectedObj = {};
              for(var x=0;x<arr.length;x++){
                 $scope.selectedObj[arr[x].id] = arr[x];
              }
              $scope.hospitalObj = new Object();
              resetPage();
+             $scope.iObj.areaName = areaname;
              getHospital(true);
     		 $scope.select_hospital_modal.show();
     	},
@@ -65,6 +70,7 @@ function(  $rootScope, $filter, $ionicModal,Hospital,$ionicScrollDelegate) {
         obj.pageNum = page.pageNum;
         obj.pageSize = page.pageSize;
         obj.hospitalName = $scope.iObj.inputNameModel;
+        obj.areaName = $scope.iObj.areaName;
         Hospital.get(obj,{},function(param){
             if(bool){
                 page.pages = param.pages;
@@ -99,6 +105,7 @@ function(  $rootScope, $filter, $ionicModal,Hospital,$ionicScrollDelegate) {
     				$scope.hospitalObj[o]["name"] = $scope.selectedObj[o].name;
     				delete $scope.selectedObj[o];
     			}
+                $scope.select_hospital_modal.hide();
     			$scope.selectedObj = {};
     		}
 			delete $scope.hospitalObj[item.id] ;

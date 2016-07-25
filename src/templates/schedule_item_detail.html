@@ -19,7 +19,7 @@
         <ion-option-button class="button-positive" ng-click="call_customer(schedule)">
             <i class="icon ion-ios-telephone"></i>
         </ion-option-button>
-        <ion-option-button ng-show="current_user.data.id==schedule.userId&&schedule.status=='未拜访'&& schedule.isToday()" class="button-positive" ng-click="close_schedule(schedule)">
+        <ion-option-button ng-show="current_user.data.id==schedule.userId&&schedule.status=='未拜访'" class="button-positive" ng-click="close_schedule(schedule)">
             <i class="icon ion-ios-minus"></i>
         </ion-option-button>
     </ion-item>
