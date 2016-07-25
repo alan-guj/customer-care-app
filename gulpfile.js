@@ -192,6 +192,12 @@ gulp.task('copy:extras', function () {
     .pipe(gulp.dest(yeoman.output));
 });
 
+gulp.task('copy:libs', function () {
+  return gulp.src(yeoman.src + '/libs/**/*')
+    .pipe(gulp.dest(yeoman.output + '/libs'));
+});
+
+
 gulp.task('copy:fonts', function () {
   return gulp.src('bower_components/ionic/fonts/*')
     .pipe(gulp.dest(yeoman.output + '/fonts'));
@@ -212,12 +218,12 @@ gulp.task('copy:bower', function () {
 
 gulp.task('build:dev', ['clean:dev'], function () {
   yeoman.output = yeoman.dev;
-  runSequence(['bower','images', 'copy:extras', 'copy:fonts','client:build:dev']);
+  runSequence(['bower','images', 'copy:extras', 'copy:libs','copy:fonts','client:build:dev']);
 });
 
 gulp.task('build:prod',['clean:prod'], function () {
   yeoman.output = yeoman.prod;
-  runSequence(['bower','images', 'copy:extras', 'copy:fonts', 'client:build:prod']);
+  runSequence(['bower','images', 'copy:extras', 'copy:libs','copy:fonts', 'client:build:prod']);
 });
 
 gulp.task('default', ['build:dev']);
