@@ -160,21 +160,51 @@ app=angular.module('customer_care_web_server', ['ionic','angular-popups', 'ionic
             templateUrl: 'templates/schedule_item_detail.html',
             controller: 'schedule_item_detail_ctrl'
         })
+        .state('group_homepage', {
+            cache: false,
+            url: '/group_homepage',
+            templateUrl: 'templates/group_homepage.html',
+            controller: 'group_homepage_ctrl'
+        })
         .state('personal_homepage', {
             cache: false,
             url: '/personal_homepage',
             templateUrl: 'templates/personal_homepage.html',
             controller: 'personal_homepage_ctrl',
-            onEnter: function($window,$state){
-                // $window.localStorage["global_visit_bool"]
-                if(!$window.localStorage.hasOwnProperty("global_visit_num") || $window.localStorage["global_visit_num"]==0){
-                    $window.localStorage["global_visit_num"] = 1;
+            onEnter: function($window,$state,current_user){
+                var isManager = false;
+                if(current_user.hasOwnProperty("enpinfo") && current_user.enpinfo && current_user.enpinfo.hasOwnProperty("isManager")){
+                    isManager = current_user.enpinfo.isManager;
+                }
+                var tmpDate = (new Date()).Format("yyyy-MM-dd");
+                if($window.localStorage.hasOwnProperty("global_visit_time") && $window.localStorage.hasOwnProperty("global_visit_num")){
+                    if($window.localStorage["global_visit_time"]!=tmpDate ||
+                        $window.localStorage["global_visit_num"]==0
+                       ){
+                        $window.localStorage["global_visit_num"]=1;
+                        $window.localStorage["global_visit_time"] = tmpDate;
+                        if(isManager){
+                            if($window.localStorage["global_visit_panel"]=="group"){
+                                $state.go('group_homepage');
+                            }else{
+                                $window.localStorage["global_visit_panel"] = "personal";
+                            }
+                        }
+                    }else{
+                        $state.go('schedule_list');
+                    }
                 }else{
-                    $state.go('schedule_list');
+                    $window.localStorage["global_visit_num"]=1;
+                    $window.localStorage["global_visit_time"] = tmpDate;
+                    if(isManager){
+                        $window.localStorage["global_visit_panel"] = "group";
+                        $state.go('group_homepage');
+                    }else{
+                        $window.localStorage["global_visit_panel"] = "personal";
+                    }
                 }
             }
         })
-
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/personal_homepage');

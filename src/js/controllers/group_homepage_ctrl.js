@@ -16,7 +16,7 @@ app.controller('group_homepage_ctrl',['$window','$scope','$state','$ionicModal',
 	$scope.topndata={data:[]};
 	$scope.todayArr = [];$scope.topN ={topNArray: []};
 	$scope.selfdata = {};
-	var DEFAULT_PHOTO="/img/man.jpg";
+	var DEFAULT_PHOTO="img/man.jpg";
 	if(current_user.hasOwnProperty("enpinfo") && current_user.enpinfo &&  current_user.enpinfo.hasOwnProperty("isManager")){
 		$scope.isManagerView = current_user.enpinfo.isManager;
 	}

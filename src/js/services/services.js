@@ -287,3 +287,11 @@ angular.module('CustomerCareService', [ 'configure', 'ngResource' ])
           }
         });
 })
+.factory('PersonalGroup', function($resource, services) {
+    return $resource(services.personal_group_uri, {}, {
+        update:{
+           method:"PUT",
+            params:{}
+          }
+        });
+})
