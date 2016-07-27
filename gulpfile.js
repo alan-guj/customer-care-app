@@ -75,14 +75,13 @@ gulp.task('clean:tmp', function (cb) {
 });
 
 gulp.task('watch', ['build:dev'],function () {
+//  gulp.watch('bower.json', ['bower']);
   gulp.watch(paths.styles,['build:dev']);
   gulp.watch(paths.views.main,['client:build:dev']);
   gulp.watch(paths.views.files,['build:dev']);
-
-    gulp.watch(paths.scripts,['build:dev']);
-
+  gulp.watch(paths.scripts,['build:dev']);
   gulp.watch(paths.sass, ['sass']);
-  gulp.watch('bower.json', ['bower']);
+
 });
 
 
