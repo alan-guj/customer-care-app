@@ -155,7 +155,7 @@ app.controller('personal_homepage_ctrl',['$window','$scope','$state','$ionicModa
         // evObj.initMouseEvent( 'click', false, false);
         // document.getElementById("asdasd").dispatchEvent(evObj);
          
-         var evt = document.createEvent( 'HTMLEvents' );
+         var evt = document.createEvent( 'Event' );
         // initEvent接受3个参数：
         // 事件类型，是否冒泡，是否阻止浏览器的默认行为
         evt.initEvent("hold", false, false);
@@ -174,6 +174,9 @@ app.controller('personal_homepage_ctrl',['$window','$scope','$state','$ionicModa
 	                // document.body.appendChild(canvas);
 			        newImg = document.createElement("img");
 			        newImg.src =  dataUrl;
+			  //       $(newImg).click(function(){
+					//   alert(1);
+					// });
 			    }
 	        });
 	}
