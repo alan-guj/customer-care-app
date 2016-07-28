@@ -4,8 +4,7 @@
             <ion-side-menu-content>
                 <div class="bar bar-header item-input-inset">
                     <!--<ion-nav-LEFT-button>-->
-                    <button class="button button-icon icon ion-navicon" menu-toggle="left" 
-                        style="margin-right: 10.66667px">
+                    <button class="button button-icon ion-ios-calendar" ui-sref="schedule_list">
                     </button>
                     <!--</ion-nav-back-button>-->
                     <label class="item-input-wrapper">
@@ -13,8 +12,7 @@
                         <input type="text" placeholder="姓名/角色/省市" id="search" ng-model="choice.searchText" ng-model-options="{debounce:800}" ng-change="set_clfilter()">
                     </label>
                     <!--<ion-nav-buttons side="right">-->
-                    <button class="button button-icon icon ion-ios-calendar" ui-sref="schedule_list" menu-toggle="right">
-                    </button>
+                    <button class="button button-icon ion-navicon" menu-toggle="right"></button>
                     <!--</ion-nav-buttons>-->
                 </div>
                 <div class="my-tabs-top">                 
@@ -23,8 +21,8 @@
                 </div>
                 <ion-content class="has-header has-my-tabs-top has-footer cList" delegate-handle="mainScroll">
                     <div class="listNullShow" ng-hide="customers.list.length||customers.page.pages">
-                         <i class="ion-android-sad"></i>
-                         <p>抱歉，未搜索到匹配数据<br/>请重新设置或输入筛选条件，谢谢！</p>
+                         <i class="ion-coffee"></i>
+                         <p>抱歉，未搜索到匹配的客户，<br/>请重新设置或输入筛选条件，谢谢！</p>
                     </div>
                     
                     <ion-list>
@@ -67,7 +65,7 @@
                     </button>
                 </div>
             </ion-side-menu-content>
-            <ion-side-menu side="left" width="240" class="cs-side-bar">
+            <ion-side-menu side="right" width="240" class="cs-side-bar">
 
                 <ion-content class="cs-side-content has-footer">
                     <ion-list> 

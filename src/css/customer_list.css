@@ -9,7 +9,7 @@ div.fiveStar.visitName{font-size: 14px;}
 .ion-star{color: #d0d0d0;font-size: 16px;}
 .ion-star.active{color: #ff7600;}
 .listNullShow{text-align: center;margin-top: 100px;}
-.listNullShow i{font-size: 60px;color:rgba(102,204,51,0.8); }
+.listNullShow i{font-size: 64px;color:rgba(106,75,35,0.8); }
 .colorMaskDiv{position: absolute;left: 0;top: 0;bottom: 0;width: 100%;}
 .redBg{background-color:rgba(239,78,58,0.2);border-left: 10px solid rgba(204,35,17,1);}
 .yellowBg{background-color:rgba(240,184,64,0.2);border-left: 10px solid rgba(211,146,17,1);}
@@ -22,6 +22,8 @@ div.fiveStar.visitName{font-size: 14px;}
 .my-tabs-top{width: 100%;font-size: 14px;background: #f8f8f8;text-align: center;
 	height: 28px;line-height: 28px;border-top: 1px solid #999;}
 .has-my-tabs-top{top:72px;}
+span.filterParam{color: #999;margin-right: 10px;font-size: 12px}
+.noBreakRow{overflow-x: scroll;white-space: nowrap;padding-left: 10px;}
 h1.title .icon.ion-coffee{font-size: 20px;color: #6F4E37;padding-right: 5px;}
 .bar.cs-prevAfter{background: #f8f8f8;}
 .bar.cs-prevAfter i{font-size: 20px;color:#333;}

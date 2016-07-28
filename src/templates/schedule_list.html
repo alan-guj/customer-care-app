@@ -3,21 +3,22 @@
         <ion-side-menus>
             <ion-side-menu-content>
                 <div class="bar bar-header item-input-inset">
-                    <button class="button button-icon ion-navicon" menu-toggle="left"></button>
+                        <button class="button button-icon ion-ios-people" ui-sref="customer_list"></button>
                         <label class="item-input-wrapper">
                             <i class="icon ion-calendar placeholder-icon"></i>
                             <input ng-click="pick_date()" type="text" readonly="readonly" ng-model="select_date">
-                        </label>
-                    <button class="button button-icon ion-ios-people" ui-sref="customer_list"></button>
+                        </label>                    
+                        <button class="button button-icon ion-navicon" menu-toggle="right"></button>
                 </div>
-                <div class="progress-line">
-                        <div ng-repeat="i in schedule_list.list"
-                             class="progress" ng-class="i.getColor()"></div>
+                <div class="my-tabs-top noBreakRow">                
+                  <span ng-show="screens.role !='不限'" class="filterParam">角色：{{screens.role}}</span> 
+                  <span ng-show="screens.provinces !=''" class="filterParam">省份：{{screens.provinces}}</span>
+                  <span ng-show="screens.userNames !=''" class="filterParam">拜访人：{{screens.userNames}}</span>
                 </div>
-                <ion-content delegate-handle="schedules_list" class="has-top-progress-bar has-header has-footer">
+                <ion-content delegate-handle="schedules_list" class="has-header has-footer" ng-class="((screens.role !='不限')||(screens.provinces !='')||(screens.userids !=''))&&'has-my-tabs-top'">
                     <div class="listNullShow" ng-hide="schedule_list.list.length||schedule_list.page.pages">
-                         <i class="ion-android-sad"></i>
-                         <p>抱歉，未搜索到匹配数据<br/>请重新设置或输入筛选条件，谢谢！</p>
+                         <i class="ion-coffee"></i>
+                         <p>抱歉，未搜索到匹配的日程，<br/>请重新设置或输入筛选条件，谢谢！</p>
                     </div>
 
                     <ion-list>
@@ -64,8 +65,8 @@
                     <button class="button button-positive" ng-click="add_schedule_item()">添加新日程</button>
                 </div>
             </ion-side-menu-content>
-            <ion-side-menu side="left" width="150">
-                <ion-header-bar class="bar-stable"></ion-header-bar>
+            <ion-side-menu side="right" width="150">
+                
                 <ion-content scroll="false">
                     <ion-list>
                         <ion-item ng-repeat='o in filter_options.time_range' menu-close class="item-icon-right" ng-click="set_filter('time_range',o)">
@@ -77,6 +78,12 @@
                         <ion-item ng-repeat='o in filter_options.scope' menu-close class="item-icon-right" ng-click="set_filter('scope',o)">
                             {{o.title}}计划
                             <i class="radio-icon ion-checkmark" ng-class="filter_param.scope.value!=o.value && 'invisible'"></i>
+                        </ion-item>
+                    </ion-list>
+                    <ion-list>
+                        <ion-item  menu-close class="item-icon-right" ng-click="set_screens()">
+                            筛选计划
+                            <i class="ion-chevron-right"></i>
                         </ion-item>
                     </ion-list>
                 </ion-content>

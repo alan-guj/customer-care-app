@@ -5,7 +5,7 @@ function(        $window,$scope,  $state,  $ionicViewSwitcher,  $ionicPopup,  $i
     $scope.current_user = current_user;
 
     $scope.ScheduleService = ScheduleService;
-
+   
     $scope.filter_options = {
         time_range:[
             {title:'当日',value:'day'},
@@ -16,6 +16,9 @@ function(        $window,$scope,  $state,  $ionicViewSwitcher,  $ionicPopup,  $i
             {title:'我的',value:'my'},
         ]
     };
+
+    $scope.screens={'role':'不限','provinces':'','userids':'','userNames':''};
+
     if(current_user.data.enterprise_id && current_user.enpinfo.isManager)
         $scope.filter_options.scope.push({title:'小组',value:'group'});
 
@@ -26,16 +29,35 @@ function(        $window,$scope,  $state,  $ionicViewSwitcher,  $ionicPopup,  $i
             scope:$scope.filter_options.scope[0],
         });
 
+    function set_filter_screens(){
+        if($scope.filter_param.scope.value == 'my'){
+            $scope.schedule_list.setFilter({
+                date:$scope.select_date_value.toISOString(),
+                range:$scope.filter_param.time_range.value,
+                scope:$scope.filter_param.scope.value,
+                role:$scope.screens.role,
+                provinces:$scope.screens.provinces
+            });
+        }else{
+            $scope.schedule_list.setFilter({
+                date:$scope.select_date_value.toISOString(),
+                range:$scope.filter_param.time_range.value,
+                scope:$scope.filter_param.scope.value,
+                role:$scope.screens.role,
+                provinces:$scope.screens.provinces,
+                userids:$scope.screens.userids
+            });
+        }
+        
+    }
+
     $scope.set_filter= function(type,option) {
         $scope.filter_param[type]= option;
         $scope.select_date = $filter('date')($scope.select_date_value,'mediumDate')+'('+
             $scope.filter_param.scope.title+$scope.filter_param.time_range.title+'计划)';
         localConfig.setObject('schedule_filter_param',$scope.filter_param);
-        $scope.schedule_list.setFilter({
-            date:$scope.select_date_value.toISOString(),
-            range:$scope.filter_param.time_range.value,
-            scope:$scope.filter_param.scope.value
-        });
+        
+        set_filter_screens();
         $scope.remain = true;
         $ionicScrollDelegate.scrollTop();
     };
@@ -59,11 +81,8 @@ function(        $window,$scope,  $state,  $ionicViewSwitcher,  $ionicPopup,  $i
             $scope.select_date_value.setTime(val);
             $scope.select_date = $filter('date')($scope.select_date_value,'mediumDate')+'('+
                 $scope.filter_param.scope.title+$scope.filter_param.time_range.title+'计划)';
-            $scope.schedule_list.setFilter({
-                    date:$scope.select_date_value.toISOString(),
-                    range:$scope.filter_param.time_range.value,
-                    scope:$scope.filter_param.scope.value
-            });
+            
+            set_filter_screens();
             $scope.remain = true;
         },
         templateType:'modal',
@@ -170,20 +189,29 @@ function(        $window,$scope,  $state,  $ionicViewSwitcher,  $ionicPopup,  $i
 
 
     /************************************************************
-     * 日程详情模态框
+     * 日程筛选条件模态框
      * *********************************************************/
 
-    //$ionicModal.fromTemplateUrl('templates/schedule_item_detail.html',{
-        //scope: $scope,
-        //animation: 'slide-in-up'
-    //}).then(function(modal){
-        //$scope.schedule_item_detail_modal = modal;
-    //});
+    $ionicModal.fromTemplateUrl('templates/schedule_screen.html',{
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal){
+        $scope.schedule_screen_modal = modal;
+    });
 
+    $scope.$on('schedule_screens_confirm',function(event,screens){
+        $scope.screens.role = screens.role;
+        $scope.screens.provinces = screens.provinces;
+        $scope.screens.userids = screens.visitPersonsId;
+        $scope.screens.userNames = screens.visitPersonsName;
+        console.log('$scope.screens',$scope.screens);
+        set_filter_screens();
+    });
 
-    //$scope.$on('close_schedule_item_detail',function(event){
-        //$scope.schedule_item_detail_modal.hide();
-    //});
+    $scope.set_screens = function(){
+        $scope.$broadcast('schedule_screens_set',$scope.filter_param.scope.value);
+        $scope.schedule_screen_modal.show();
+    }
 
     $scope.show_schedule_detail = function(i) {
         console.log('goto:',i);
@@ -241,4 +269,93 @@ function(        $window,$scope,  $state,  $ionicViewSwitcher,  $ionicPopup,  $i
         // localConfig.set("global_visit_bool",false);
         $state.go("personal_homepage");
     }
+}])
+
+
+
+app.controller('schedule_screens_ctrl',[
+    '$scope','current_user','select_enpuser','select_provinces','localConfig',
+    function($scope,current_user,select_enpuser,select_provinces,localConfig){
+    var selecBool = true;
+    var groupId = current_user.data.enterprise_id;
+    $scope.filterScope = 'my';
+    $scope.provincesArray = new Array();
+    $scope.isFManager = (current_user.enpinfo.hasOwnProperty("isManager")?current_user.enpinfo.isManager:false); 
+    var tpIdArray = new Array();
+    var tpNameArray = new Array();
+    var visitPersons = new Array();
+
+    function callback(data,type){
+        console.log("00000000000data=====",data,type);
+        if(type=="add"){
+            tpIdArray.push(data.id);
+            tpNameArray.push(data.name);
+            visitPersons.push(data);
+        }else{
+            for(i=0;i< tpIdArray.length;i++){
+                if (parseInt(tpIdArray[i]) == data.id){ 
+                    tpIdArray.splice(i, 1);
+                    tpNameArray.splice(i, 1);
+                    visitPersons.splice(i, 1);
+                    break;
+                }
+            }
+        }
+        $scope.screenObj.visitPersonsId = tpIdArray.join(',') ;
+        $scope.screenObj.visitPersonsName = tpNameArray.join(',') ;
+    }
+
+    function initScreen(){
+        $scope.screenObj = localConfig.getObject(
+        'schedule_screens_param',
+        {           
+            role:'不限',
+            visitPersonsId:'',
+            visitPersonsName:'',
+            provinces:''
+        });
+
+        if($scope.screenObj.visitPersonsId !=""){
+            tpIdArray = $scope.screenObj.visitPersonsId.split(",");
+            tpNameArray = $scope.screenObj.visitPersonsName.split(",");
+            visitPersons = [];
+            for(i=0;i< tpIdArray.length;i++){
+                var tpObj = new Object();
+                tpObj.id = parseInt(tpIdArray[i]);
+                tpObj.name = tpNameArray[i];
+
+                visitPersons[i] = tpObj;
+            }
+        }
+        console.log('initScreen',visitPersons);   
+        select_enpuser.init(true,groupId,selecBool,visitPersons,callback);
+        select_provinces.init($scope.screenObj,true);
+    }
+    
+       
+    $scope.$on('schedule_screens_set',function(event,scope){
+        $scope.filterScope = scope;
+        console.log('$scope.filterScope',$scope.filterScope);
+        initScreen();
+    });
+
+    $scope.close_p_panel = function(isConfirm){
+        if(isConfirm){
+            localConfig.setObject('schedule_screens_param',$scope.screenObj);
+            $scope.$emit('schedule_screens_confirm',$scope.screenObj);
+        }
+
+        select_enpuser.destory();
+        select_provinces.destory();
+        $scope.schedule_screen_modal.hide();
+    };
+
+    $scope.rowClickFun = function(){     
+        select_enpuser.show();  
+    }
+
+    $scope.chooseProvinces = function(){
+        select_provinces.show();
+    }
+
 }])

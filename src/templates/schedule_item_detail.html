@@ -25,7 +25,7 @@
     </ion-item>
     </ion-list>
     </ion-content>
-    <ion-content delegate-handle="logs-content" ng-class="show_bottom_menu && 'has-bottom-menu'" class="has-footer schedule-logs has-schedule-item-header">
+    <ion-content delegate-handle="logs-content" ng-class="show_bottom_menu && 'has-bottom-menu has-footer'" class="schedule-logs has-schedule-item-header">
         <ion-refresher ng-show="!schedule.show_basic_info" pulling-text="下拉显示基本信息" on-refresh="display_basic_info()"></ion-refresher>
         <div ng-if="schedule.show_basic_info" class="list schedule-basic-info-list" ng-click="current_user.data.id==schedule.userId && edit_schedule()" on-drag-up="hide_basic_info()">
             <li class="item schedule-log-item">

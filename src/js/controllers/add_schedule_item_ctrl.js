@@ -3,7 +3,7 @@ app.controller('add_schedule_item_ctrl', [ '$scope', '$ionicModal','Schedule','i
 			var date_value = new Date();
 			$scope.careWayGrp = [ '当面拜访', '电话拜访', '科室会','学术培训' ];
 			initStartData();
-
+			
 			/** *********取消日程新增或者编辑************ */
 			$scope.cancelAdd = function() {
 				initStartData();
@@ -36,7 +36,7 @@ app.controller('add_schedule_item_ctrl', [ '$scope', '$ionicModal','Schedule','i
 						//通知客户列表页面更新
 						$scope.$emit('customList_add_schedule_item_confirm',resp.schedule);
 
-					}, function(err) {
+					}, function(err) { 	
 						console.log(err)
 					});
 				}
@@ -49,7 +49,7 @@ app.controller('add_schedule_item_ctrl', [ '$scope', '$ionicModal','Schedule','i
 			$scope.$on('customList_add_schedule_item', function(event, id , name) {
 					initStartData();
 					//来自客户列表页的修改，客户不能再修改，更改schedule_id确保名称不能再被修改
-					$scope.scheduleInfo.schedule_id=-1;
+					$scope.scheduleInfo.schedule_id=-1;					
 					$scope.scheduleInfo.customer_id=id;
 					$scope.scheduleInfo.customer_name=name;
 			})
@@ -88,7 +88,7 @@ app.controller('add_schedule_item_ctrl', [ '$scope', '$ionicModal','Schedule','i
 		            $scope.scheduleInfo.date = date_value.toISOString();
 		            $scope.scheduleInfo.dateShow = $filter('date')(date_value,'mediumDate');
 		        }
-
+		       
 		    };
 
 		    /**************************************************
