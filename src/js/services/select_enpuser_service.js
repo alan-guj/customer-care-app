@@ -87,7 +87,7 @@ function(  $rootScope, $filter, $ionicModal,EnporgUser) {
                  	if(resp.enpuser[x].userId>0){
                  		var isExist = false;
                  		for(var y=0;y<selectedArr.length;y++){
-                 			if(resp.enpuser[x].userId==selectedArr.id){
+                 			if(resp.enpuser[x].userId==selectedArr[y].id){
                  				isExist = true;
                  			}
                  		}
