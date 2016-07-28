@@ -317,6 +317,9 @@
 .personal-title i{
 	padding-right: 8px;
 }
+.personal-top2-img{
+	left: 20px !important;
+}
 .persional-top3-item{
 	border: 0px !important;
 	padding:5px !important;
@@ -335,6 +338,31 @@
 .persional-top3-item div{
 	padding: 0px !important;
 	padding-left: 60px !important;
+}
+.personal-self-gold{
+	float: right;
+    padding-right: 14px;
+    padding-top: 4px;
+    height: 30px;
+    width: 50px;
+}
+.personal-self-gold img{
+	height: 20px;
+	width: 20px;
+	margin-top: 2px;
+}
+.percent-bar-div{
+	background-color: #28a54c;
+    height: 22px;
+    /* position: absolute; */
+    /* top: 10px; */
+    margin-top: 14px;
+    margin-left: -4px;
+}
+.personal-self-gold label{
+	position: absolute !important;
+    margin-top: 1px !important;
+    margin-left: 2px !important;
 }
 .self-row label{
 	padding-left: 4px;
@@ -375,14 +403,34 @@
     color: #98CD74 !important;
 }
 .manager-change-button{
-	position: absolute;
-	right: 20px;
-	top:9px;
 	font-size: 28px;
 }
-
-
-
+.great-div-style{
+	position: absolute;
+    top: 3px;
+    right: 55px;
+}
+.great-div-style img{
+	width: 25px;
+	height: 25px;
+}
+.great-div-style i{
+	font-size: 25px;
+	color: #FFF;
+}
+.great-div-style label{
+	color: #FFF;   
+	position: absolute;
+    top: 2px;
+}
+.great-div-style span{
+	position: absolute;
+    padding: 2px 4px 2px 2px;
+    font-size: 8px;
+    left: 20px;
+    background-color: #333 !important;
+    top: 2px;
+}
 
 
 
