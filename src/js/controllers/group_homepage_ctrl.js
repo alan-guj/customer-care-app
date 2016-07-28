@@ -1,14 +1,14 @@
 app.controller('group_homepage_ctrl',['$window','$scope','$state','$ionicModal','PersonalGroup','current_user',
 	function( $window,$scope,$state,$ionicModal,PersonalGroup,current_user ){
 	var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-	var goldImg = {0:"img/first.png",1:"img/second.png",2:"img/third.png"};
+	var goldImg = {0:"/static/img/first.png",1:"/static/img/second.png",2:"/static/img/third.png"};
 	var piename = {
 		unfinished:{name:"未处理",color:"#e42112"},
 		over:{name:"已拜访",color:"#28a54c"},
 		cancle:{name:"已取消",color:"#e6b500"},
 		lazy:{name:"已延期",color:"#b2b2b2"}
 	};
-	$scope.isManagerView = false;
+	// $scope.isManagerView = false;
 	$scope.topNNumner = 10;
 	$scope.hasData = true;
 	$scope.piedata = {pie1data:[],pie0data:""};
@@ -16,10 +16,10 @@ app.controller('group_homepage_ctrl',['$window','$scope','$state','$ionicModal',
 	$scope.topndata={data:[]};
 	$scope.todayArr = [];$scope.topN ={topNArray: []};
 	$scope.selfdata = {};
-	var DEFAULT_PHOTO="img/man.jpg";
-	if(current_user.hasOwnProperty("enpinfo") && current_user.enpinfo &&  current_user.enpinfo.hasOwnProperty("isManager")){
-		$scope.isManagerView = current_user.enpinfo.isManager;
-	}
+	var DEFAULT_PHOTO="/static/img/man.jpg";
+	// if(current_user.hasOwnProperty("enpinfo") && current_user.enpinfo &&  current_user.enpinfo.hasOwnProperty("isManager")){
+	// 	$scope.isManagerView = current_user.enpinfo.isManager;
+	// }
 	PersonalGroup.get({group_id:current_user.data.enterprise_id},function(param){
 		createResult(param);
 	});
@@ -59,9 +59,11 @@ app.controller('group_homepage_ctrl',['$window','$scope','$state','$ionicModal',
 			$scope.hasData = true;
 			var tmpTopArr = [];$scope.topNNumner = 0;
 			for(var x = 0;x<data.ranking.grouyRank.length;x++){
+				var rnum = data.ranking.grouyRank[x].rank;
 				var obj = {};$scope.topNNumner++;
 				obj.id=data.ranking.grouyRank[x].user.id;
-				obj.img = (x>2?goldImg[2]:goldImg[x]);
+				obj.rank = rnum;
+				obj.img = (rnum>10?"":goldImg[rnum-1]);
 				obj.name=data.ranking.grouyRank[x].user.name;
 				obj.customers=data.ranking.grouyRank[x].number;
 				if(data.ranking.grouyRank[x].user.hasOwnProperty("portrait_uri")){
@@ -72,9 +74,14 @@ app.controller('group_homepage_ctrl',['$window','$scope','$state','$ionicModal',
 				$scope.topN.topNArray.push(obj);
 				tmpTopArr.push(data.ranking.grouyRank[x].number);
 			}
-			for(var x=tmpTopArr.length-1;x>=0;x--){
+			// for(var x=tmpTopArr.length-1;x>=0;x--){
+			// 	$scope.topndata.data.push(tmpTopArr[x]);
+			// }
+			for(var x=0;x<tmpTopArr.length;x++){
 				$scope.topndata.data.push(tmpTopArr[x]);
 			}
+		}else{
+			$scope.hasData = false;
 		}
 		for(var x=data.week.date.length-1;x>=0;x--){
 			var tmpDate = new Date(data.week.date[x]);
