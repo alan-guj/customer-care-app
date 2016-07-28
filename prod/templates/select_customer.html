@@ -1,0 +1,39 @@
+<!-- <ion-modal-view ng-controller="select_customer_ctrl" title="客户选择"> -->
+<ion-modal-view title="客户选择">
+     <div class="bar bar-header item-input-inset">
+         <label class="item-input-wrapper">
+             <i class="icon ion-search placeholder-icon"></i>
+             <input type="text" placeholder="姓名/角色/省市" id="search" ng-model="choice.searchText" ng-model-options="{debounce:800}" ng-change="choiceChange()">
+         </label>
+     </div>
+     <ion-content class="has-header has-footer cList" delegate-handle="mainScroll">
+         <div class="listNullShow" ng-hide="customList.list.length||customList.page.pages">
+             <i class="ion-android-sad"></i>
+             <p>抱歉，未搜索到匹配数据<br/>请重新设置或输入筛选条件，谢谢！</p>
+        </div>
+         <ion-list>
+             <ion-item collection-repeat="item in customList.list"  
+             		  class="item item-avatar" ng-click="selectCustomer(item)">
+                 
+                <img class="item-image" ng-src="{{item.headUrl||'img/man.jpg'}}">
+                <h2>{{item.name}} <span class="itemRole">{{item.type}}</span></h2>
+                <div style="margin-top: 3px">
+                    <span class="itemProvince">{{item.province}}</span>
+                    <span class="itemEvent">{{showEvent(item)}}</span>
+                </div>
+
+                 <div class="fiveStar"><i ng-repeat="i in currentUser.fiveStars" class="icon ion-star {{item.myCustomer.star>$index ?'active':''}}"></i></div>
+                 </div>
+             </ion-item>
+            <ion-infinite-scroll 
+                        ng-if="customList.hasMore()"
+                        on-infinite="loadMore()"
+                        distance="1%">
+            </ion-infinite-scroll>
+
+         </ion-list>
+     </ion-content>
+     <div class="bar bar-footer bar-stable button-bar">
+         <button class="button button-positive" ng-click="cancelSelect()">取消 </button>
+     </div>
+</ion-modal-view>

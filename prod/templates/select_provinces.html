@@ -1,0 +1,31 @@
+ <div  style="width: 60%;position: absolute;right: 0" class="modal">
+    <ion-header-bar class="bar-stable high-index">
+          <label class="item item-input f-people-search">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="请输入省份" id="search" ng-model="searchText" ng-model-options="{debounce:800}">
+          </label>
+    </ion-header-bar>
+     <ion-content  class="has-header high-index">
+        <ul id="ca-persion-list" class="list">
+            <li ng-repeat="s in selectedArray" class="item item-checkbox name-li noborder">
+                <label class="checkbox" ng-if="!multiSelect">
+                    <input ng-click="selectItem(false,s);" name="radioname"  ng-checked="true" type="radio">
+                </label>
+                <label class="checkbox"  ng-if ="multiSelect">
+                    <input ng-click="selectItem(false,s);" ng-checked="true"  type="checkbox">
+                </label>
+                {{s}}
+            </li>
+            <li ng-repeat="u in unSelectedArray | filter:searchText" class="item item-checkbox name-li noborder">
+                <label class="checkbox" ng-if="!multiSelect">
+                    <input ng-click="selectItem(true,u);" name="radioname"  ng-checked="false" type="radio">
+                </label>
+                <label class="checkbox"  ng-if ="multiSelect">
+                    <input ng-click="selectItem(true,u);" ng-checked="false"  type="checkbox">
+                </label>
+                {{u}}
+            </li>
+        </ul>
+    </ion-content>
+</div>
+

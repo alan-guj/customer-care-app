@@ -1,0 +1,177 @@
+<ion-view title="日程详情">
+    <ion-content scroll="false">
+    <ion-list>
+    <ion-item ng-click="close_schedule_item_detail()"
+               class="item item-thumbnail-left">
+        <div ng-class="'background-'+schedule.getColor()" class="colorbar"></div>
+        <img class="item-image" ng-src="{{schedule.customer.headUrl||'img/man.jpg'}}" ng-click="$event.stopPropagation();show_customer(schedule.customer)">
+        <div class="row">
+            <span class="col-80" style="font-size: 14px;">{{schedule.date | date:'mediumDate'}}</span>
+            <span class="col-20" style="font-size: 14px;">{{schedule.status}}</span>
+        </div>
+        <div class="row" style="margin-top: 22px; padding-bottom: 0px;">
+            <span class="col-80" style="font-size: 18px;">{{schedule.customer.name}}</span>
+            <span style="font-size: 14px; padding-top: 2px; color: #444">{{schedule.customer.type}}</span>
+        </div>
+        <ion-option-button class="button-positive" ng-click="sms_customer(schedule)">
+            <i class="icon ion-ios-chatbubble"></i>
+        </ion-option-button>
+        <ion-option-button class="button-positive" ng-click="call_customer(schedule)">
+            <i class="icon ion-ios-telephone"></i>
+        </ion-option-button>
+        <ion-option-button ng-show="current_user.data.id==schedule.userId&&schedule.status=='未拜访'" class="button-positive" ng-click="close_schedule(schedule)">
+            <i class="icon ion-ios-minus"></i>
+        </ion-option-button>
+    </ion-item>
+    </ion-list>
+    </ion-content>
+    <ion-content delegate-handle="logs-content" ng-class="show_bottom_menu && 'has-bottom-menu has-footer'" class="schedule-logs has-schedule-item-header">
+        <ion-refresher ng-show="!schedule.show_basic_info" pulling-text="下拉显示基本信息" on-refresh="display_basic_info()"></ion-refresher>
+        <div ng-if="schedule.show_basic_info" class="list schedule-basic-info-list" ng-click="current_user.data.id==schedule.userId && edit_schedule()" on-drag-up="hide_basic_info()">
+            <li class="item schedule-log-item">
+                <span>目的：{{schedule.purpose}}</span>
+            </li>
+            <li class="item schedule-log-item">
+                <span>方式：{{schedule.type}}</span>
+            </li>
+            <li class="item schedule-log-item">
+                <span>说明：{{schedule.description}}</span>
+            </li>
+        </div>
+        <ion-list class="schedule-log-list" ng-controller="show_schedule_log_ctrl">
+            <ion-item ng-click="show_log(i,schedule)" ng-repeat="i in schedule.logs" class="item-icon-left schedule-log-item">
+                <div ng-if="i.type=='short'">
+                    <i class="icon ion-ios-chatbubble"></i>
+                    <span>{{i.text}}</span>
+                </div>
+                <div ng-if="i.type=='location'">
+                    <i class="icon ion-ios-location"></i>
+                    <span ng-click="map_location()">足迹：位于 {{i.address}}</span>
+                </div>
+                <div ng-if="i.type=='result'">
+                    <i class="icon ion-ios-checkmark"></i>
+                    <span>已于{{i.time | date:'medium' }}关闭({{i.result}})</span>
+                </div>
+                <div ng-if="i.type=='voice'">
+                    <i class="icon" ng-init="i.playing=false" ng-class="{false:'ion-ios-play',true:'ion-ios-pause'}[i.playing]"></i>
+                    <span ng-if="!i.playing">时长{{i.period}}秒({{i.time | date:'medium'}})</span>
+                    <span ng-if="i.playing">内容：{{i.text}}</span>
+                </div>
+                <div ng-if="i.type=='photos'">
+                    <i class="icon ion-ios-photos"></i>
+                    <div class="images">
+                        <img ng-repeat="p in i.oss_urls | limitTo:9" ng-src="{{p}}">
+                    </div>
+                </div>
+                <div ng-if="i.type=='worklog'">
+                    <i class="icon ion-ios-book"></i>
+                    工作日志({{i.time | date:'medium'}})
+                </div>
+                <div ng-if="i.type=='chat_duration'">
+                    <i class="icon ion-ios-timer"></i>
+                    <span>交谈时间：从{{i.start | date:'HH:mm'}}到{{i.end | date:'HH:mm'}},共{{(i.duration/60000).toFixed(0)}}分钟</span>
+                </div>
+
+            </ion-item>
+        </ion-list>
+        <ion-list ng-controller="visit_history_ctrl" class="list-inset">
+            <ion-item class="item-divider item-icon-left item-button" ng-click="show_visit_history(schedule.customer)">
+                显示历史记录
+                <i class="icon icon" ng-class="{true:'ion-ios-arrow-up',false:'ion-ios-arrow-down'}[is_show_visit_history]"></i>
+            </ion-item>
+            <div ng-show="is_show_visit_history">
+            <ion-item ng-repeat="item in visit_histories.list">
+                <div class="list schedule-basic-info-list">
+                    <li class="item title">
+                        <span>{{item.user.name}} {{item.endTime | date:'mediumDate'}}</span>
+                    </li>
+                    <li class="item">
+                        <span>目的：{{item.purpose}}</span>
+                    </li>
+                    <li class="item">
+                        <span>方式：{{item.type}}</span>
+                    </li>
+                    <li class="item">
+                        <span>说明：{{item.description}}</span>
+                    </li>
+                </div>
+                <ion-list class="schedule-log-list" ng-controller="show_schedule_log_ctrl">
+                    <ion-item ng-click="show_log(i,item)" ng-repeat="i in item.getLogs()" class="item-icon-left">
+                        <div ng-if="i.type=='short'">
+                            <i class="icon ion-ios-chatbubble"></i>
+                            <span>{{i.text}}</span>
+                        </div>
+                        <div ng-if="i.type=='location'">
+                            <i class="icon ion-ios-location"></i>
+                            <span ng-click="map_location()">足迹：位于 {{i.address}}</span>
+                        </div>
+                        <div ng-if="i.type=='result'">
+                            <i class="icon ion-ios-checkmark"></i>
+                            <span>已于{{i.time | date:'medium' }}关闭({{i.result}})</span>
+                        </div>
+                        <div ng-if="i.type=='voice'">
+                            <i class="icon" ng-init="i.playing=false" ng-class="{false:'ion-ios-play',true:'ion-ios-pause'}[i.playing]"></i>
+                            <span ng-if="!i.playing">时长{{i.period}}秒({{i.time | date:'medium'}})</span>
+                            <span ng-if="i.playing">内容：{{i.text}}</span>
+                        </div>
+                        <div ng-if="i.type=='photos'">
+                            <i class="icon ion-ios-photos"></i>
+                            <div class="images">
+                                <img ng-repeat="p in i.oss_urls | limitTo:9" ng-src="{{p}}">
+                            </div>
+                        </div>
+                        <div ng-if="i.type=='worklog'">
+                            <i class="icon ion-ios-book"></i>
+                            工作日志({{i.time | date:'medium'}})
+                        </div>
+                        <div ng-if="i.type=='chat_duration'">
+                            <i class="icon ion-ios-timer"></i>
+                            <span>交谈时间：从{{i.start | date:'HH:mm'}}到{{i.end | date:'HH:mm'}},共{{(i.duration/60000).toFixed(0)}}分钟</span>
+                        </div>
+
+                    </ion-item>
+                </ion-list>
+        </ion-item>
+        </div>
+        <ion-infinite-scroll
+                       ng-if="visit_histories.hasMore()"
+                       on-infinite="loadMore()"
+                       distance="1%"
+                       immediate-check="true">
+            </ion-infinite-scroll>
+        </ion-list>
+    </ion-content>
+    <div ng-show="schedule.userId==current_user.data.id">
+    <div ng-init="text_input=true" ng-class="show_bottom_menu && 'has-bottom-menu'" class="bar bar-footer item-input-inset">
+        <button ng-disabled="!voice_input_ready" ng-class="{true:'ion-ios-mic',false:'ion-ios-chatbubble'}[text_input]" ng-click="text_input=!text_input;show_bottom_menu=false;" class="button small-button button-icon icon"></button>
+        <label ng-show="text_input" class="item-input-wrapper">
+            <input type="text" placeholder="输入拜访日志" ng-focus="show_bottom_menu=false" ng-model="short_log.text">
+        </label>
+        <button ng-show="text_input" class="button small-button button-icon icon ion-ios-paperplane wrapper-icon" ng-click="add_short_log()"></button>
+        <button ng-show="!text_input"  ontouchstart="return false" ng-click="click_record_button()" on-hold="hold_record_button()" class="button button-block button-stable">{{voice_input_hint}}</button>
+        <button class="buttons small-button button-icon icon" ng-class="{true:'ion-ios-minus-outline',false:'ion-ios-plus-outline'}[show_bottom_menu]" ng-click="show_bottom_menu=!show_bottom_menu"></button>
+    </div>
+    <div ng-init="show_bottom_menu=false" ng-show="show_bottom_menu" class="row bottom-menu">
+        <div class="bottom-menu-item">
+            <button class="button button-stable button-large icon ion-ios-camera" ng-click="show_bottom_menu=false;add_photos()">
+            </button>
+            <div>照片</div>
+        </div>
+        <div class="bottom-menu-item">
+            <button class="button button-stable button-large icon ion-ios-location" ng-click="show_bottom_menu=false;add_location();">
+            </button>
+            <div>足迹</div>
+        </div>
+        <div class="bottom-menu-item">
+            <button class="button button-stable button-large icon ion-ios-paper" ng-click="show_bottom_menu=false;add_work_log()">
+            </button>
+            <div>工作日志</div>
+        </div>
+        <div class="bottom-menu-item">
+            <button class="button button-stable button-large icon ion-ios-calendar" ng-click="show_bottom_menu=false;add_next_visit()">
+            </button>
+            <div>下次拜访</div>
+        </div>
+    </div>
+    </div>
+</ion-viw>

@@ -1,0 +1,13 @@
+<ion-modal-view title="地图显示位置列表">
+	 <ion-content style="padding-bottom:25px;">
+		 <ul class="list">
+			<li ng-repeat="item in mapItemLst"  class="item" ng_click="selectAPosition({{item}})">
+				{{$index+1}}、{{ item.address }}
+			</li>
+			<li class="Item"><br><br></li>
+		</ul>
+	  </ion-content>
+	  <div class="bar bar-footer bar-stable button-bar">
+        <button class="button button-positive" ng-click="backMapPage()">返回</button>
+     </div>
+</ion-modal-view>

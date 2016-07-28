@@ -1,0 +1,72 @@
+<ion-modal-view ng-controller="add_customer_ctrl">
+	<ion-header-bar align-title="center" class="bar-dark">
+    	<a ng-click="calcelFun()" class="button  ion-chevron-left button-clear button-light">&nbsp;返回</a>
+  		<h1 class="title">添加新客户</h1>
+	</ion-header-bar>
+	<ion-content class="content  has-header" scroll="true">
+		<div class="item-avatar">
+			 <img src="img/1.jpg">
+			 <div class="top-name-div">
+			 	 <input type="text" placeholder="姓名" >
+			 	 <div>
+			 	 	 <i ng-click="starClick($index,$event);" ng-repeat="i in star" class="icon ion-star {{starIndex>$index?'active':''}}"></i>
+			 	 </div>
+			 </div>
+		</div>
+		<div class="attribute-list">
+		  <label  class="item item-input">
+		    <span class="input-label">手机号码</span>
+		    <input ng-focus="inputFocus(this)" ng-blur="chechPhoneNum($event);"    type="text">
+		  </label>
+		  <label class="item item-input">
+		    <span class="input-label spacing20">生日</span>
+		    <!-- <input type="text"> -->
+		    <input type="text" readonly="readonly" placeholder="生日" ng-model="select_date" ng-click="pick_date()">
+		  </label>
+		  <label class="item item-input">
+		    <span class="input-label spacing20">地址</span>
+		    <input type="text">
+		  </label>
+		  <label class="item item-input item-select">
+		    <span class="input-label">客户类型</span>
+		     <select>
+			    <option selected>科室主任</option>
+			    <option>医院代理商</option>
+			    <option>省级代理商</option>
+			    <option>业务代表</option>
+    		 </select>
+		  </label>
+		  <div class="item item-input {{hospitalarr.length>0?'bottom-border0':''}}">
+		    <span class="input-label">相关医院</span>
+		    <input id="hospital-input" placeholder="输入或选择医院" class="text-indent" type="text">
+		    <i ng-click="addHospital();" class="item-floating-label ion-plus-round add-icon high-index"></i>
+		  </div>
+		  <div id="hospitalDiv"  class="item {{hospitalarr.length>0?'bottom-border2':''}}" >
+		    	<div ng-repeat="o in hospitalarr" class="hsp-span">
+				    <label>{{o.name}}</label>
+				    <i ng-click="cancelHosp(o.id);" class="icon ion-close-round high-index"></i>
+		    	</div>
+		    	<div style="clear: both"></div>
+		  </div>
+		  <div class="item item-input {{cunsomerarr.length>0?'bottom-border0':''}}">
+		    <span class="input-label">关联客户</span>
+		    <input id="cunsomer-input" placeholder="选择客户" class="text-indent" type="text">
+		    <i ng-click="addCustomer();" class="item-floating-label ion-plus-round add-icon high-index"></i>
+		  </div>
+		  <div id="customerDiv"  class="item {{cunsomerarr.length>0?'bottom-border2':''}}">
+		    <div ng-repeat="o in cunsomerarr" class="hsp-span">
+			    <label>{{o.name}}</label>
+			    <i ng-click="cancelCustom(o.id);" class="icon ion-close-round high-index"></i>
+		    </div>
+		    <div style="clear: both"></div>
+		  </div>
+	</div>
+	</ion-content>
+  	<div class="bar bar-footer bar-stable button-div">
+  		<div>
+  			<button class="button button-stable" ng-click="calcelFun()">取消</button>
+	  	   <button class="button button-positive">确定</button>
+  		</div>
+	  	   
+	</div>
+</ion-modal-view>

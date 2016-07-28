@@ -1,0 +1,31 @@
+ <div  style="width: 60%;position: absolute;right: 0" class="modal" ng-blur="inputNameModel=''">
+    <ion-header-bar class="bar-stable high-index">
+          <label class="item item-input f-people-search">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input id="iText" type="text" ng-model="iObj.inputNameModel" ng-change="nameInputChange(iObj.inputNameModel);"  placeholder="请输入姓名">
+          </label>
+    </ion-header-bar>
+     <ion-content  class="has-header high-index">
+        <ul id="ca-persion-list" class="list">
+            <li ng-repeat="(a,p) in selectedObj" ng-show="p.show" class="item item-checkbox name-li noborder">
+                <label class="checkbox" ng-if="!multiSelect">
+                    <input ng-click="pInputClick({{p}},false);" name="radioname"  ng-checked="true" type="radio">
+                </label>
+                <label class="checkbox"  ng-if ="multiSelect">
+                    <input ng-click="pInputClick({{p}},false);" ng-checked="true"  type="checkbox">
+                </label>
+                {{p.name}}
+            </li>
+            <li ng-repeat="(n,m) in enpuserObj" ng-show="m.show" class="item item-checkbox name-li noborder">
+                <label class="checkbox" ng-if="!multiSelect">
+                    <input ng-click="pInputClick({{m}},true);" name="radioname"  ng-checked="false" type="radio">
+                </label>
+                <label class="checkbox"  ng-if ="multiSelect">
+                    <input ng-click="pInputClick({{m}},true);" ng-checked="false"  type="checkbox">
+                </label>
+                {{m.name}}
+            </li>
+        </ul>
+    </ion-content>
+</div>
+

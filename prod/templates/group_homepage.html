@@ -1,0 +1,69 @@
+<ion-view class="personal-panel"  view-title="团队数据" >
+    <div class="bar bar-header bar-dark">
+        <button class="button" ng-show="false" style="border:0px">
+            <i class="ion-ios-redo manager-change-button"></i>
+        </button>
+        <h1 class="title personal_top_title">{{titleTime}}</h1>
+        <button class="button" style="border:0px;margin-right:9px;" ng-click="gotoPersonalView();">
+            <i class="ion-ios-person manager-change-button" ></i>
+        </button>
+    </div>
+     <ion-content class="has-header">
+        <div class="personal-title-div">
+            <label class="personal-title"><i class="ion-ios-pie"></i>昨日拜访任务完成情况</label>
+        </div>
+        <div class="row">
+          <personalpie  style="height:150px;width:100%"></personalpie>
+        </div>
+        <div class="personal-title-div">
+            <label class="personal-title"><i class="ion-ribbon-b active"></i>昨日排名</label>
+        </div>
+        <div class="row">
+            <div class="col no-data-div" ng-show="!hasData" >
+                <img src="img/empty.png">
+                <label>暂无数据！</label>
+            </div>
+            <div ng-show="hasData" class="col-70">
+                <div class="row top10-div-style" style="height: 48px;" ng-repeat="p in topN.topNArray" ng-class="{true:'bg-666',false:'bg-777'}[$index%2!=0]">
+                    <div class="col" ng-class="{true:'top10-padd2',false:'top10-padd1'}[$index==0]">
+                        <div  class="item item-avatar persional-top3-item" ng-class="{true:'bg-666',false:'bg-777'}[$index%2!=0]" href="#">
+                            <img ng-if="p.rank<3" class="item-image" ng-src="{{p.img}}">
+                            <label class="item-image persional-top10-label" ng-if="p.rank>2">{{p.rank}}</label>
+                        </div>
+                    </div>
+                    <div class="col" ng-class="{true:'top10-padd2',false:'top10-padd1'}[$index==0]">
+                        <a class="item item-avatar persional-top3-item" ng-class="{true:'bg-666',false:'bg-777'}[$index%2!=0]" href="#">
+                            <img class="item-image" ng-src="{{p.photo}}">
+                        </a>
+                    </div>
+                    <div class="col" ng-class="{true:'top10-padd2',false:'top10-padd1'}[$index==0]">
+                        <label>{{p.name}}</label>
+                    </div>
+                    <div class="col" style="text-align: right" ng-class="{true:'top10-padd2',false:'top10-padd1'}[$index==0]">
+                        <label>{{p.customers}}人次</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-30" style="margin-left: -1px">
+                <!-- <topnbar style="height:192px;width:100%"></topnbar> -->
+                <div class="row top3-div-style bg-666 self-row" style="height:48px;" ng-repeat="o in topndata.data  track by $index" ng-class="{true:'bg-666',false:'bg-777'}[$index%2!=0]" >
+                    <div ng-if="topndata.data[0]!=0" style="width:{{(topndata.data[$index]/topndata.data[0])*100+'%'}};{{$index==0?'margin-top: 10px':''}}" class="percent-bar-div"></div>
+                </div>
+            </div>
+            <!-- <div ng-show="hasData" class="col-30">
+                <topnbar style="height:192px;width:100%"></topnbar>
+            </div> -->
+        </div>
+        <div class="personal-title-div">
+            <label class="personal-title"><i class="ion-stats-bars"></i>最近十个工作日拜访统计</label>
+        </div>
+        <div class="row">
+          <personalbar style="height:150px;width:100%"></personalbar>
+        </div>
+        <div class="go-to-schedule">
+                    <a href="#/schedule_list">查看拜访日程>></a>
+        </div>
+     </ion-content>
+
+    
+</ion-viw>

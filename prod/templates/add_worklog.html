@@ -1,0 +1,31 @@
+<ion-modal-view ng-controller="add_worklog_ctrl" title="工作日志">
+<form name="workLogForm" novalidate>
+	<div class="bar bar-header" style="border-bottom:2px solid #387ef5;">
+	        <div class="title"  style="font-weight:bold;">{{worklog.isEdit?'编辑':'添加'}}工作日志</div>
+	</div>
+	<ion-content class="has-footer has-header">
+		<div class="attribute-list">
+			<label>
+				<span class="work_log_input_label wl_success">成功之处</span>
+				<textarea ng-model="worklog.successDesc"  placeholder="请输入..." required ng-disabled="isEditable == false" class="textarea_info"></textarea>  
+			</label>
+
+			<label>
+				<span class="work_log_input_label wl_prov">待改进之处</span>
+				<textarea ng-model="worklog.improveDesc"  placeholder="请输入..." required  ng-disabled="isEditable == false" class="textarea_info"></textarea>  
+			</label>
+			
+			<label>
+				<span class="work_log_input_label wl_plan">下一步计划</span>
+				<textarea ng-model="worklog.plan"  placeholder="请输入..." required ng-disabled="isEditable == false" class="textarea_info"></textarea>  
+			</label>
+		</div>
+	</ion-content>
+	 <div class="bar bar-footer">
+		<div class="button-bar">
+			<button class="button button-stable" ng-click="cancelAdd()">取消</button>
+			<button class="button button-positive" ng-click="submitAdd()" ng-disabled="workLogForm.$invalid || isEditable == false" >确定</button>
+		 </div>
+	 </div>
+</form>
+</ion-modal-view>

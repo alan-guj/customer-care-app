@@ -1,0 +1,47 @@
+<ion-view ng-controller="focus_people_ctrl"  title="添加责任人">
+    <div class="bar bar-header bar-dark">
+        <h1 class="title">添加责任人</h1>
+    </div>
+    <ion-content class="has-header has-footer">
+    <div class="row first-row" ng-click="rowClickFun(false);">
+            <a  class="item col-25 ">
+                 <div>
+                    <span>主责任人</span>
+                </div>
+            </a>
+            <div  class="item  col col-65 col-div">
+                <a class="name-star-a" ng-if="mainRespon.id" >
+                    <div>
+                       <label>{{mainRespon.name || ''}}</label>
+                    </div>
+                    <div>
+                        <i ng-repeat="i in star" class="icon ion-star {{mainRespon.star>$index?'active':''}}"></i>
+                    </div>
+                </a>
+            </div>
+            <i  class="item col-10 ion-ios-compose-outline" ></i>
+    </div>
+    <div class="row second-row" ng-click="rowClickFun(true);">
+             <a class="item col-25">
+                 <div>
+                    <span class="spacing-30">其他</span>
+                </div>
+             </a>
+             <div  class="item  col col-65 col-div">
+                <a class="name-star-a"  ng-repeat="o in originalUser"  >
+                    <div>
+                       <label>{{o.name || '--'}}</label>
+                    </div>
+                    <div>
+                        <i  ng-repeat="i in star" class="icon ion-star {{o.star>$index?'active':''}}"></i>
+                    </div>
+                </a>
+             </div>
+             <i class="item col-10 ion-ios-compose-outline"></i>
+    </div>
+    </ion-content>
+    <div class="bar bar-footer bar-stable button-div">
+        <button class="button button-positive" ng-click="close_p_panel()">关闭</button>
+    </div>
+</ion-view>
+
