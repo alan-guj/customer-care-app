@@ -6,7 +6,7 @@ app.controller('customer_detail_ctrl',['$scope','$ionicModal','CustomerOwner','c
   $scope.cItem ={'index':0,'cUser':''};
   $scope.customer= CustomerService.getCustomer($stateParams.customer_id);
   console.log('customer:',$scope.customer);
-
+  
   if(typeof($scope.customer.index) !="undefined"){
      $scope.cItem.index = $scope.customer.index + 1;
      $scope.customers= CustomerService.getCustomerList();
@@ -136,7 +136,7 @@ app.controller('customer_detail_ctrl',['$scope','$ionicModal','CustomerOwner','c
             $scope.customer = $scope.customers.list[$scope.cItem.index -1];
             $scope.$broadcast('init_visit_history');
           }
-    	}
+    	}    
 	}
 
 

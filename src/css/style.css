@@ -358,3 +358,5 @@ i.circle {
     line-height: 22px;
 }
 .item-box .item-content{padding-bottom: 8px;}
+input.cs-visitPersonsName{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+input.cs-visitPersonsName:disabled{background: #fff;}

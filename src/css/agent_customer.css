@@ -28,7 +28,7 @@
 .birthday-span{
 	top: 20px !important;
 	height: 25px;
-	left: 140px !important;
+	left: 140px;
 }
 .agent-name-div input{
 	font-size: 25px;
