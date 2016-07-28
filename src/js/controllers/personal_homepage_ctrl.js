@@ -146,7 +146,7 @@ app.controller('personal_homepage_ctrl',['$window','$scope','$state','$ionicModa
 		}
 		$scope.topNNumner++;
 		// setTimeout(createImg,1000);
-		createImg();
+		// createImg();
 	}
 	var newImg = null;
 	$scope.shareImgFunction = function(){
