@@ -134,8 +134,9 @@ function(  $rootScope, $filter,current_user, $ionicModal,CustomerService,ionicDa
 			CustomerService.addCustomer($scope.userObject);
 		}
     // $scope.$emit('add_customer_result', 'confirm');
-    callbacks.function();
 		$scope.user_info_modal.remove();
+		callbacks.function();
+		
 	}
 	$scope.addCustomerM = function(obj){
 		var bool = true;var data = $scope.$eval(obj);
