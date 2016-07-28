@@ -51,7 +51,7 @@ return {
 			};
 
             // barChart.dispatchAction({type: 'showTip', seriesIndex: 0,dataIndex:6});
-            scope.$watch('topndata', function(newValue,oldValue, scope) {
+            scope.$watch('topndatas', function(newValue,oldValue, scope) {
             	element[0].style.height=scope.topNNumner*48+'px';
 				var barChart = echarts.init(element[0],'macarons');  
 				option.series[0].data =newValue.data;
