@@ -1,17 +1,40 @@
-<ion-view class="personal-panel"  view-title="个人数据" >
+<ion-view id="personalPanel" class="personal-panel"  view-title="个人数据" >
     <div class="bar bar-header bar-dark">
+        <button class="button" ng-click="shareImgFunction();">
+            <i class="ion-ios-redo manager-change-button" ng-click="shareImgFunction();"></i>
+        </button>
         <h1 class="title personal_top_title">{{titleTime}}</h1>
-        <i ng-if="isManagerView" class="ion-ios-people manager-change-button" ng-click="gotoGroupView();"></i>
+        <button id="asdasd" class="button" ng-click="gotoGroupView();">
+            <i class="ion-ios-people manager-change-button" ng-click="gotoGroupView();"></i>
+        </button>
     </div>
      <ion-content class="has-header">
         <div class="personal-title-div">
             <label class="personal-title"><i class="ion-ios-pie"></i>昨日拜访任务完成情况</label>
+            <div class="great-div-style">
+            <!-- <img src="/static/img/great.png"> -->
+                <i class="ion-thumbsup"></i>
+                <span class="badge badge-assertive">{{finishNum || 0}}</span>
+            </div>
         </div>
         <div class="row">
           <personalpie  style="height:150px;width:100%"></personalpie>
         </div>
         <div class="personal-title-div">
             <label class="personal-title"><i class="ion-ribbon-b active"></i>昨日排名</label>
+            <div class="personal-self-gold" style="margin-right: 21px;">
+                <img src="img/third.png">
+                <label>{{medal.bronze}}</label>
+            </div>
+            <div class="personal-self-gold">
+                <img src="img/second.png">
+                <label>{{medal.silver}}</label>
+            </div>
+            <div class="personal-self-gold">
+                <img src="img/first.png">
+                <label>{{medal.gold}}</label>
+            </div>
+            
         </div>
         <div class="row">
             <div class="col-70">
@@ -20,34 +43,37 @@
                         <label>您的昨日排名：</label>
                     </div>
                     <div class="col-25"><label>{{selfdata.rank}}名</label></div>
-                    <div class="col-25"><label>{{selfdata.number}}人次</label></div>
+                    <div class="col-25" style="text-align: right;"><label style="margin-right: 5px;">{{selfdata.number}}人次</label></div>
                 </div>
                 <div class="row top3-div-style" style="height: 48px;" ng-repeat="p in topN.topNArray" ng-class="{true:'bg-666',false:'bg-777'}[$index%2!=0]">
                     <div class="col">
-                        <div  class="item item-avatar persional-top3-item" ng-class="{true:'bg-666',false:'bg-777'}[$index%2!=0]" href="#">
-                            <img ng-if="$index<3" class="item-image" ng-src="{{p.img}}">
-                            <label class="item-image persional-top10-label" ng-if="$index>2">{{$index+1}}</label>
+                        <div  class="item item-avatar persional-top3-item" ng-class="{true:'bg-666',false:'bg-777'}[$index%2!=0]" >
+                            <img  class="item-image" ng-src="{{p.img}}">
+                            <!-- <label class="item-image persional-top10-label" ng-if="$index>2">{{$index+1}}</label> -->
                         </div>
                     </div>
                     <div class="col">
-                        <a class="item item-avatar persional-top3-item" ng-class="{true:'bg-666',false:'bg-777'}[$index%2!=0]" href="#">
+                        <a class="item item-avatar persional-top3-item" ng-class="{true:'bg-666',false:'bg-777'}[$index%2!=0]" >
                             <img class="item-image" ng-src="{{p.photo}}">
                         </a>
                     </div>
                     <div class="col">
                         <label>{{p.name}}</label>
                     </div>
-                    <div class="col">
+                    <div class="col" style="text-align: right">
                         <label>{{p.customers}}人次</label>
                     </div>
                 </div>
             </div>
-            <div class="col-30">
-                <topnbar style="height:192px;width:100%"></topnbar>
+            <div class="col-30" style="margin-left: -1px">
+                <!-- <topnbar style="height:192px;width:100%"></topnbar> -->
+                <div class="row top3-div-style bg-666 self-row" style="height:48px;" ng-repeat="o in topndata.data  track by $index" ng-class="{true:'bg-777',false:'bg-666'}[$index%2!=0]" >
+                    <div ng-if="topndata.data[1]!=0" style="width:{{(topndata.data[$index]/topndata.data[1])*100+'%'}};{{$index==0?'margin-top: 8px;':''}}" class="percent-bar-div"></div>
+                </div>
             </div>
         </div>
         <div class="personal-title-div">
-            <label class="personal-title"><i class="ion-stats-bars"></i>最近7天拜访统计</label>
+            <label class="personal-title"><i class="ion-stats-bars"></i>最近十个工作日拜访统计</label>
         </div>
         <div class="row">
           <personalbar  style="height:150px;width:100%"></personalbar>
