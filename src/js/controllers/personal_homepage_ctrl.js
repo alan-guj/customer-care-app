@@ -1,7 +1,7 @@
 app.controller('personal_homepage_ctrl',['$window','$scope','$state','$ionicModal','Personal','current_user',
 	function( $window,$scope,$state, $ionicModal,Personal,current_user ){
 	var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-	var goldImg = {0:"/static/img/first.png",1:"/static/img/second.png",2:"/static/img/third.png"};
+	var goldImg = {0:"img/first.png",1:"img/second.png",2:"img/third.png"};
 	var piename = {
 		unfinished:{name:"未处理",color:"#e42112"},
 		over:{name:"已拜访",color:"#28a54c"},
@@ -19,7 +19,7 @@ app.controller('personal_homepage_ctrl',['$window','$scope','$state','$ionicModa
         "gold": 0,
         "silver": 0
     };
-	var DEFAULT_PHOTO="/static/img/man.jpg";
+	var DEFAULT_PHOTO="img/man.jpg";
 	// if(current_user.hasOwnProperty("enpinfo") && current_user.enpinfo && current_user.enpinfo.hasOwnProperty("isManager")){
 	// 	$scope.isManagerView = current_user.enpinfo.isManager;
 	// }
