@@ -163,13 +163,16 @@ app=angular.module('customer_care_web_server', ['ionic','angular-popups', 'ionic
         .state('group_homepage', {
             cache: false,
             url: '/group_homepage',
-            templateUrl: 'templates/group_homepage.html',
-            controller: 'group_homepage_ctrl'
+            templateUrl: 'static/templates/group_homepage.html',
+            controller: 'group_homepage_ctrl',
+            onEnter: function($window){
+                $window.localStorage["global_visit_num"]=1;
+            }
         })
         .state('personal_homepage', {
             cache: false,
             url: '/personal_homepage',
-            templateUrl: 'templates/personal_homepage.html',
+            templateUrl: 'static/templates/personal_homepage.html',
             controller: 'personal_homepage_ctrl',
             onEnter: function($window,$state,current_user){
                 var isManager = false;
@@ -178,7 +181,7 @@ app=angular.module('customer_care_web_server', ['ionic','angular-popups', 'ionic
                 }
                 var tmpDate = (new Date()).Format("yyyy-MM-dd");
                 if($window.localStorage.hasOwnProperty("global_visit_time") && $window.localStorage.hasOwnProperty("global_visit_num")){
-                    if($window.localStorage["global_visit_time"]!=tmpDate ||
+                    if($window.localStorage["global_visit_time"]!=tmpDate || 
                         $window.localStorage["global_visit_num"]==0
                        ){
                         $window.localStorage["global_visit_num"]=1;
