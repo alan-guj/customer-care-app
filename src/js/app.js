@@ -163,7 +163,7 @@ app=angular.module('customer_care_web_server', ['ionic','angular-popups', 'ionic
         .state('group_homepage', {
             cache: false,
             url: '/group_homepage',
-            templateUrl: 'static/templates/group_homepage.html',
+            templateUrl: 'templates/group_homepage.html',
             controller: 'group_homepage_ctrl',
             onEnter: function($window){
                 $window.localStorage["global_visit_num"]=1;
@@ -172,7 +172,7 @@ app=angular.module('customer_care_web_server', ['ionic','angular-popups', 'ionic
         .state('personal_homepage', {
             cache: false,
             url: '/personal_homepage',
-            templateUrl: 'static/templates/personal_homepage.html',
+            templateUrl: 'templates/personal_homepage.html',
             controller: 'personal_homepage_ctrl',
             onEnter: function($window,$state,current_user){
                 var isManager = false;
