@@ -1,5 +1,6 @@
 <ion-modal-view ng-controller="schedule_screens_ctrl"  title="设置筛选条件">
         <ion-content class="has-footer">
+        
             <div class="attribute-list">
                 <label class="item item-input item-select">
                     <span class="input-label">客户角色</span>
@@ -11,12 +12,12 @@
                 </label>
                 <div class="item item-input" ng-click="chooseProvinces();">
                     <span class="input-label">客户省份</span>
-                    <input type="text" class="cs-visitPersonsName" placeholder="请选择客户省份（可多选）" ng-model="screenObj.provinces" disabled="disabled"></input>
+                    <input type="text" class="cs-userNames" placeholder="请选择客户省份（可多选）" ng-model="screenObj.provinces" disabled="disabled"></input>
                 </div>
 
                 <div class="item item-input" ng-show="isFManager && (filterScope != 'my')" ng-click="rowClickFun();">
                     <span class="input-label spacing9">拜访人</span>
-                    <input type="text" class="cs-visitPersonsName" placeholder="请选择拜访人（可多选）" ng-model="screenObj.visitPersonsName" disabled="disabled"></input>
+                    <input type="text" class="cs-userNames" placeholder="请选择拜访人（可多选）" ng-model="screenObj.userNames" disabled="disabled"></input>
                 </div>                
             </div>
         </ion-content>

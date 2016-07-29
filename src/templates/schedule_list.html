@@ -10,10 +10,10 @@
                         </label>                    
                         <button class="button button-icon ion-navicon" menu-toggle="right"></button>
                 </div>
-                <div class="my-tabs-top noBreakRow">                
+                <div class="my-tabs-top noBreakRow" ng-show="((screens.role !='不限')||(screens.provinces !='')||(screens.userids !=''))">                
                   <span ng-show="screens.role !='不限'" class="filterParam">角色：{{screens.role}}</span> 
                   <span ng-show="screens.provinces !=''" class="filterParam">省份：{{screens.provinces}}</span>
-                  <span ng-show="screens.userNames !=''" class="filterParam">拜访人：{{screens.userNames}}</span>
+                  <span ng-show="(filter_param.scope.value=='group')&&(screens.userNames !='')" class="filterParam">拜访人：{{screens.userNames}}</span>
                 </div>
                 <ion-content delegate-handle="schedules_list" class="has-header has-footer" ng-class="((screens.role !='不限')||(screens.provinces !='')||(screens.userids !=''))&&'has-my-tabs-top'">
                     <div class="listNullShow" ng-hide="schedule_list.list.length||schedule_list.page.pages">
