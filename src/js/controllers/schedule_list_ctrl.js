@@ -29,6 +29,15 @@ function(        $window,$scope,  $state,  $ionicViewSwitcher,  $ionicPopup,  $i
             scope:$scope.filter_options.scope[0],
         });
 
+    $scope.screens = localConfig.getObject(
+        'schedule_screens_param',
+        {           
+            role:'不限',
+            userids:'',
+            userNames:'',
+            provinces:''
+        });
+
     function set_filter_screens(){
         if($scope.filter_param.scope.value == 'my'){
             $scope.schedule_list.setFilter({
@@ -200,16 +209,14 @@ function(        $window,$scope,  $state,  $ionicViewSwitcher,  $ionicPopup,  $i
     });
 
     $scope.$on('schedule_screens_confirm',function(event,screens){
-        $scope.screens.role = screens.role;
-        $scope.screens.provinces = screens.provinces;
-        $scope.screens.userids = screens.visitPersonsId;
-        $scope.screens.userNames = screens.visitPersonsName;
+        $scope.screens = screens;
+        localConfig.setObject('schedule_screens_param',$scope.screens);
         console.log('$scope.screens',$scope.screens);
         set_filter_screens();
     });
 
     $scope.set_screens = function(){
-        $scope.$broadcast('schedule_screens_set',$scope.filter_param.scope.value);
+        $scope.$broadcast('schedule_screens_set',$scope.filter_param.scope.value,$scope.screens);
         $scope.schedule_screen_modal.show();
     }
 
@@ -274,8 +281,8 @@ function(        $window,$scope,  $state,  $ionicViewSwitcher,  $ionicPopup,  $i
 
 
 app.controller('schedule_screens_ctrl',[
-    '$scope','current_user','select_enpuser','select_provinces','localConfig',
-    function($scope,current_user,select_enpuser,select_provinces,localConfig){
+    '$scope','current_user','select_enpuser','select_provinces',
+    function($scope,current_user,select_enpuser,select_provinces){
     var selecBool = true;
     var groupId = current_user.data.enterprise_id;
     $scope.filterScope = 'my';
@@ -286,7 +293,7 @@ app.controller('schedule_screens_ctrl',[
     var visitPersons = new Array();
 
     function callback(data,type){
-        console.log("00000000000data=====",data,type);
+        //console.log("00000000000data=====",data,type);
         if(type=="add"){
             tpIdArray.push(data.id);
             tpNameArray.push(data.name);
@@ -301,23 +308,15 @@ app.controller('schedule_screens_ctrl',[
                 }
             }
         }
-        $scope.screenObj.visitPersonsId = tpIdArray.join(',') ;
-        $scope.screenObj.visitPersonsName = tpNameArray.join(',') ;
+        $scope.screenObj.userids = tpIdArray.join(',') ;
+        $scope.screenObj.userNames = tpNameArray.join(',') ;
     }
 
     function initScreen(){
-        $scope.screenObj = localConfig.getObject(
-        'schedule_screens_param',
-        {           
-            role:'不限',
-            visitPersonsId:'',
-            visitPersonsName:'',
-            provinces:''
-        });
 
-        if($scope.screenObj.visitPersonsId !=""){
-            tpIdArray = $scope.screenObj.visitPersonsId.split(",");
-            tpNameArray = $scope.screenObj.visitPersonsName.split(",");
+        if($scope.screenObj.userids !=""){
+            tpIdArray = $scope.screenObj.userids.split(",");
+            tpNameArray = $scope.screenObj.userNames.split(",");
             visitPersons = [];
             for(i=0;i< tpIdArray.length;i++){
                 var tpObj = new Object();
@@ -327,21 +326,21 @@ app.controller('schedule_screens_ctrl',[
                 visitPersons[i] = tpObj;
             }
         }
-        console.log('initScreen',visitPersons);   
+        //console.log('initScreen',visitPersons);   
         select_enpuser.init(true,groupId,selecBool,visitPersons,callback);
         select_provinces.init($scope.screenObj,true);
     }
     
        
-    $scope.$on('schedule_screens_set',function(event,scope){
+    $scope.$on('schedule_screens_set',function(event,scope,screens){
         $scope.filterScope = scope;
-        console.log('$scope.filterScope',$scope.filterScope);
+        $scope.screenObj = screens;
+        console.log('$scope.filterScope',$scope.screenObj);
         initScreen();
     });
 
     $scope.close_p_panel = function(isConfirm){
         if(isConfirm){
-            localConfig.setObject('schedule_screens_param',$scope.screenObj);
             $scope.$emit('schedule_screens_confirm',$scope.screenObj);
         }
 
