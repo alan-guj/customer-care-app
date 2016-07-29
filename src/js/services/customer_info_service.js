@@ -2,6 +2,7 @@ app.service('customer_info',
         [ '$rootScope', '$filter','current_user', '$ionicModal','CustomerService','ionicDatePicker','hospital_service',
 function(  $rootScope, $filter,current_user, $ionicModal,CustomerService,ionicDatePicker,hospital_service) {
 	  var $scope = $rootScope.$new();var re = /^1[3|4|5|7|8]\d{9}$/;var isEdit = false; var select_date_value = new Date();
+    var images = {localId: [],serverId: []};
     $scope.repreArr = [
         {name:"医生"},
         {name:"医院代理商"},
@@ -14,6 +15,7 @@ function(  $rootScope, $filter,current_user, $ionicModal,CustomerService,ionicDa
         {name:"未知"}
     ];
     function initPrarm(){
+      images = {localId: [],serverId: []};
       $scope.select_data_show = "";
     	select_date_value = new Date();
     	$scope.stars = [30, 20, 15, 10, 5];$scope.relationObj = {users:[]};
@@ -273,7 +275,6 @@ function(  $rootScope, $filter,current_user, $ionicModal,CustomerService,ionicDa
 	/*****************************************************
          *头像上传
          * ***************************************************/
-	var images = {localId: [],serverId: []};
     $scope.chooseImage = function () {
         wx.chooseImage({
             count: 1,
