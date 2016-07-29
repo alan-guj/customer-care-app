@@ -201,7 +201,7 @@ function(        $window,$scope,  $state,  $ionicViewSwitcher,  $ionicPopup,  $i
      * 日程筛选条件模态框
      * *********************************************************/
 
-    $ionicModal.fromTemplateUrl('templates/schedule_screen.html',{
+    $ionicModal.fromTemplateUrl('static/templates/schedule_screen.html',{
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function(modal){
@@ -291,7 +291,7 @@ app.controller('schedule_screens_ctrl',[
     var tpIdArray = new Array();
     var tpNameArray = new Array();
     var visitPersons = new Array();
-
+    var cancelRestoreInitVal={'role':'不限','provinces':'','userids':'','userNames':''};
     function callback(data,type){
         //console.log("00000000000data=====",data,type);
         if(type=="add"){
@@ -335,6 +335,8 @@ app.controller('schedule_screens_ctrl',[
     $scope.$on('schedule_screens_set',function(event,scope,screens){
         $scope.filterScope = scope;
         $scope.screenObj = screens;
+        shallowCopy(screens, cancelRestoreInitVal);
+
         console.log('$scope.filterScope',$scope.screenObj);
         initScreen();
     });
@@ -342,6 +344,8 @@ app.controller('schedule_screens_ctrl',[
     $scope.close_p_panel = function(isConfirm){
         if(isConfirm){
             $scope.$emit('schedule_screens_confirm',$scope.screenObj);
+        }else{
+            shallowCopy(cancelRestoreInitVal,$scope.screenObj);
         }
 
         select_enpuser.destory();
