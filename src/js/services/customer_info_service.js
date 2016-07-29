@@ -5,7 +5,7 @@ function(  $rootScope, $filter,current_user, $ionicModal,CustomerService,ionicDa
     var images = {localId: [],serverId: []}; 
     $scope.repreArr = [
         {name:"医生"},
-        {name:"医院代理商"},
+        {name:"医院代理商"}, 
         {name:"地市代理商"},
         {name:"省级代理商"},
         {name:"业务代表"},
