@@ -201,7 +201,7 @@ function(        $window,$scope,  $state,  $ionicViewSwitcher,  $ionicPopup,  $i
      * 日程筛选条件模态框
      * *********************************************************/
 
-    $ionicModal.fromTemplateUrl('static/templates/schedule_screen.html',{
+    $ionicModal.fromTemplateUrl('templates/schedule_screen.html',{
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function(modal){
