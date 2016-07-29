@@ -240,6 +240,7 @@ function(  $rootScope, $filter,current_user, $ionicModal,CustomerService,ionicDa
     // }
     // $scope.select_data_show = $filter('date')(select_date_value, 'mediumDate');
     var datepicker = {
+		templateType: 'popup',
     	from: new Date(1916, 1, 1),
         to: new Date(2020, 12, 31),
         callback: function (val) {  //Mandatory
